@@ -6,9 +6,9 @@ import { FaSearch, FaMapMarkerAlt, FaTimes, FaCalendarAlt } from "react-icons/fa
 import { useApp } from "../../app/LanguageContext";
 import { useRouter } from "next/navigation";
 
-import HotelsUz from "../../../locales/uz/hotels.json";
-import HotelsEn from "../../../locales/en/hotels.json";
-import HotelsRu from "../../../locales/ru/hotels.json";
+import HotelsUz from "../../../locales/uz/Hotels.json";
+import HotelsEn from "../../../locales/en/Hotels.json";
+import HotelsRu from "../../../locales/ru/Hotels.json";
 
 const translations = {
     uz: HotelsUz,
