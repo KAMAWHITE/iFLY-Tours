@@ -1,0 +1,284 @@
+{
+    "hotels": [
+        {
+            "id": 1,
+            "name": "HotelPulitzer Roma",
+            "city": {
+                "uz": "Rim",
+                "ru": "Рим",
+                "en": "Rome"
+            },
+            "price": 1450000,
+            "rating": 4.8,
+            "reviews": 320,
+            "image": "/hotels/rim.jpg",
+            "featured": true
+        },
+        {
+            "id": 2,
+            "name": "Giza Pyramid Edge Resort",
+            "city": {
+                "uz": "Giza",
+                "ru": "Гиза",
+                "en": "Giza"
+            },
+            "price": 980000,
+            "rating": 4.6,
+            "reviews": 150,
+            "image": "hotels/giza.jpg",
+            "featured": false
+        },
+        {
+            "id": 3,
+            "name": "Kyoto Sakura Ryokan",
+            "city": {
+                "uz": "Kioto",
+                "ru": "Киото",
+                "en": "Kyoto"
+            },
+            "price": 1850000,
+            "rating": 4.9,
+            "reviews": 210,
+            "image": "/hotels/kyoto.jpg",
+            "featured": true
+        },
+        {
+            "id": 4,
+            "name": "Petra Desert Rose",
+            "city": {
+                "uz": "Petra",
+                "ru": "Петра",
+                "en": "Petra"
+            },
+            "price": 1100000,
+            "rating": 4.7,
+            "reviews": 95,
+            "image": "/hotels/petra.jpg",
+            "featured": false
+        },
+        {
+            "id": 5,
+            "name": "Machu Picchu Sanctuary Lodge",
+            "city": {
+                "uz": "Machu-Pikchu",
+                "ru": "Мачу-Пикчу",
+                "en": "Machu Picchu"
+            },
+            "price": 2200000,
+            "rating": 4.9,
+            "reviews": 180,
+            "image": "/hotels/machu-pikchu.jpg",
+            "featured": true
+        },
+        {
+            "id": 6,
+            "name": "Maldives Azure Overwater",
+            "city": {
+                "uz": "Maldiv orollari",
+                "ru": "Мальдивы",
+                "en": "Maldives"
+            },
+            "price": 3500000,
+            "rating": 5.0,
+            "reviews": 420,
+            "image": "/hotels/maldives.jpg",
+            "featured": true
+        },
+        {
+            "id": 7,
+            "name": "Bora Bora Lagoon Resort",
+            "city": {
+                "uz": "Bora-Bora",
+                "ru": "Бора-Бора",
+                "en": "Bora Bora"
+            },
+            "price": 3800000,
+            "rating": 4.9,
+            "reviews": 310,
+            "image": "/hotels/bora.jpg",
+            "featured": false
+        },
+        {
+            "id": 8,
+            "name": "Bali Tropical Zen",
+            "city": {
+                "uz": "Bali",
+                "ru": "Бали",
+                "en": "Bali"
+            },
+            "price": 1200000,
+            "rating": 4.7,
+            "reviews": 560,
+            "image": "/hotels/bali.jpg",
+            "featured": true
+        },
+        {
+            "id": 9,
+            "name": "Santorini Sunset Suites",
+            "city": {
+                "uz": "Santorini",
+                "ru": "Санторини",
+                "en": "Santorini"
+            },
+            "price": 2400000,
+            "rating": 4.8,
+            "reviews": 290,
+            "image": "/hotels/santorini.jpg",
+            "featured": true
+        },
+        {
+            "id": 10,
+            "name": "Amalfi Coast Vista",
+            "city": {
+                "uz": "Amalfi sohillari",
+                "ru": "Амальфитанское побережье",
+                "en": "Amalfi Coast"
+            },
+            "price": 2700000,
+            "rating": 4.7,
+            "reviews": 140,
+            "image": "/hotels/amalfi.jpg",
+            "featured": false
+        },
+        {
+            "id": 11,
+            "name": "Dubai Marina Heights",
+            "city": {
+                "uz": "Dubay",
+                "ru": "Дубай",
+                "en": "Dubai"
+            },
+            "price": 2900000,
+            "rating": 4.9,
+            "reviews": 880,
+            "image": "/hotels/dubai.jpg",
+            "featured": true
+        },
+        {
+            "id": 12,
+            "name": "New York Times Square Inn",
+            "city": {
+                "uz": "Nyu-York",
+                "ru": "Нью-Йорк",
+                "en": "New York"
+            },
+            "price": 3100000,
+            "rating": 4.6,
+            "reviews": 1200,
+            "image": "/hotels/new-york.jpg",
+            "featured": false
+        },
+        {
+            "id": 13,
+            "name": "Paris Louvre Elegance",
+            "city": {
+                "uz": "Parij",
+                "ru": "Париж",
+                "en": "Paris"
+            },
+            "price": 2850000,
+            "rating": 4.8,
+            "reviews": 430,
+            "image": "/hotels/paris.jpg",
+            "featured": true
+        },
+        {
+            "id": 14,
+            "name": "Tokyo Shinjuku Central",
+            "city": {
+                "uz": "Tokio",
+                "ru": "Токио",
+                "en": "Tokyo"
+            },
+            "price": 1950000,
+            "rating": 4.7,
+            "reviews": 720,
+            "image": "/hotels/tokyo.jpg",
+            "featured": true
+        },
+        {
+            "id": 15,
+            "name": "London Bridge Boutique",
+            "city": {
+                "uz": "London",
+                "ru": "Лондон",
+                "en": "London"
+            },
+            "price": 2600000,
+            "rating": 4.5,
+            "reviews": 310,
+            "image": "/hotels/london.jpg",
+            "featured": false
+        },
+        {
+            "id": 16,
+            "name": "Iceland Aurora Lodge",
+            "city": {
+                "uz": "Islandiya",
+                "ru": "Исландия",
+                "en": "Iceland"
+            },
+            "price": 2300000,
+            "rating": 4.9,
+            "reviews": 155,
+            "image": "/hotels/iceland.jpg",
+            "featured": true
+        },
+        {
+            "id": 17,
+            "name": "Banff Mountain Retreat",
+            "city": {
+                "uz": "Banf milliy bog'i",
+                "ru": "Банфф",
+                "en": "Banff National Park"
+            },
+            "price": 1650000,
+            "rating": 4.8,
+            "reviews": 240,
+            "image": "/hotels/banf.jpg",
+            "featured": true
+        },
+        {
+            "id": 18,
+            "name": "Cappadocia Cave Suites",
+            "city": {
+                "uz": "Kappadokiya",
+                "ru": "Каппадокия",
+                "en": "Cappadocia"
+            },
+            "price": 1350000,
+            "rating": 4.9,
+            "reviews": 670,
+            "image": "/hotels/cappadocia.jpg",
+            "featured": true
+        },
+        {
+            "id": 19,
+            "name": "Serengeti Safari Camp",
+            "city": {
+                "uz": "Serengeti",
+                "ru": "Серенгети",
+                "en": "Serengeti"
+            },
+            "price": 3200000,
+            "rating": 4.7,
+            "reviews": 85,
+            "image": "/hotels/serengeti.jpg",
+            "featured": false
+        },
+        {
+            "id": 20,
+            "name": "Swiss Alps Chalet",
+            "city": {
+                "uz": "Shveytsariya Alp tog'lari",
+                "ru": "Швейцарские Альпы",
+                "en": "Swiss Alps"
+            },
+            "price": 2950000,
+            "rating": 4.9,
+            "reviews": 210,
+            "image": "/hotels/swiss-alps.jpg",
+            "featured": true
+        }
+    ]
+}

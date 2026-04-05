@@ -1,0 +1,88 @@
+{
+    "Country_info": [
+        {
+            "id": 1,
+            "img": "/slider_1.jpg",
+            "title": "Xitoyni kashf eting",
+            "text": "Xitoy: qadimiy tarix, Buyuk devor, innovatsiyalar va yorqin madaniyat.",
+            "aholi": "Aholi: 1.425 milliard",
+            "hudud": "Hududlar: 23 ta maxsus tuman",
+            "shaxarlar": "Shaharlar: Chunsing, Pekin, Shanxay",
+            "valyuta": "Valyuta: Yuan (CNY)",
+            "btn1": "Yopish",
+            "btn2": "Aloqaga chiqish"
+        },
+        {
+            "id": 2,
+            "img": "/slider_2.jpg",
+            "title": "Orollarga sayohat",
+            "text": "Orollar — dengiz, qum va sokinlik uyg'unligidagi hordiq maskanidir.",
+            "aholi": "Aholi: 500,000",
+            "hudud": "Hududlar: Turli xil orollar",
+            "shaxarlar": "Shaharlar: Bosh orol shahri, Plyaj shahri",
+            "valyuta": "Valyuta: Orol dollari (ID)",
+            "btn1": "Yopish",
+            "btn2": "Aloqaga chiqish"
+        },
+        {
+            "id": 3,
+            "img": "/slider_3.jpg",
+            "title": "Tokio, Yaponiya",
+            "text": "Tokio madaniyat, mazali taomlar, texnologiya va tarixning ajoyib uyg'unligini taklif etadi.",
+            "aholi": "Aholi: 37.4 million",
+            "hudud": "Hududlar: 23 ta maxsus tuman",
+            "shaxarlar": "Shaharlar: Tokio, Yokogama, Chiba",
+            "valyuta": "Valyuta: Yaponiya iyenasi (JPY)",
+            "btn1": "Yopish",
+            "btn2": "Aloqaga chiqish"
+        },
+        {
+            "id": 4,
+            "img": "/slider_4.jpg",
+            "title": "Dubay, BAA",
+            "text": "Dubay cheksiz shoping, jahon darajasidagi kurortlar va hayratlanarli arxitekturani taqdim etadi.",
+            "aholi": "Aholi: 3.3 million",
+            "hudud": "Hududlar: Bir nechta tuman va okruglar",
+            "shaxarlar": "Shaharlar: Dubay, Abu-Dabi",
+            "valyuta": "Valyuta: BAA dirhami (AED)",
+            "btn1": "Yopish",
+            "btn2": "Aloqaga chiqish"
+        },
+        {
+            "id": 5,
+            "img": "/slider_5.jpg",
+            "title": "Maldiv orollari",
+            "text": "Maldiv orollari firuza rang suv va oppoq qumga ega jannatmonand maskandir.",
+            "aholi": "Aholi: 540,000",
+            "hudud": "Hududlar: Atollar to'plami",
+            "shaxarlar": "Shaharlar: Male, Maafushi",
+            "valyuta": "Valyuta: Maldiv rufiyasi (MVR)",
+            "btn1": "Yopish",
+            "btn2": "Aloqaga chiqish"
+        },
+        {
+            "id": 6,
+            "img": "/slider_6.jpg",
+            "title": "Tropik Tailand",
+            "text": "Go'zal plyajlarda unutilmas hordiqdan zavqlaning.",
+            "aholi": "Aholi: 69.8 million",
+            "hudud": "Hududlar: 76 ta provinsiya",
+            "shaxarlar": "Shaharlar: Bangkok, Chiang May, Pxuket",
+            "valyuta": "Valyuta: Tailand bati (THB)",
+            "btn1": "Yopish",
+            "btn2": "Aloqaga chiqish"
+        },
+        {
+            "id": 7,
+            "img": "/slider_7.jpg",
+            "title": "Mo'jizaviy Turkiya",
+            "text": "Turkiya: Sharq va G'arb madaniyati tutashgan mo'jizalar o'lkasi.",
+            "aholi": "Aholi: 84 million",
+            "hudud": "Hududlar: 81 ta provinsiya",
+            "shaxarlar": "Shaharlar: Istanbul, Ankara, Izmir",
+            "valyuta": "Valyuta: Turk lirasi (TRY)",
+            "btn1": "Yopish",
+            "btn2": "Aloqaga chiqish"
+        }
+    ]
+}

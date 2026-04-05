@@ -1,0 +1,88 @@
+{
+    "Country_info": [
+        {
+            "id": 1,
+            "img": "/slider_1.jpg",
+            "title": "Discover China",
+            "text": "China: ancient history, Great Wall, innovations, vibrant culture.",
+            "aholi": "Population: 1.425 billion",
+            "hudud": "Regions: 23 special districts",
+            "shaxarlar": "Cities: Chongqing, Beijing, Beijing",
+            "valyuta": "Currency: Yuan (CNY)",
+            "btn1": "Close",
+            "btn2": "Contact"
+        },
+        {
+            "id": 2,
+            "img": "/slider_2.jpg",
+            "title": "Island Escape",
+            "text": "Islands are peaceful retreats where you can enjoy the sea, sand, and serenity.",
+            "aholi": "Population: 500,000",
+            "hudud": "Regions: Various islands",
+            "shaxarlar": "Cities: Main Island City, Beach City",
+            "valyuta": "Currency: Island Dollar (ID)",
+            "btn1": "Close",
+            "btn2": "Contact"
+        },
+        {
+            "id": 3,
+            "img": "/slider_3.jpg",
+            "title": "Tokyo, Japan",
+            "text": "Tokyo offers a fascinating mix of culture, food, technology, and history.",
+            "aholi": "Population: 37.4 million",
+            "hudud": "Regions: 23 special districts",
+            "shaxarlar": "Cities: Tokyo, Yokohama, Chiba",
+            "valyuta": "Currency: Japanese Yen (JPY)",
+            "btn1": "Close",
+            "btn2": "Contact"
+        },
+        {
+            "id": 4,
+            "img": "/slider_4.jpg",
+            "title": "Dubai, UAE",
+            "text": "Dubai offers endless shopping, world-class resorts, and stunning architecture.",
+            "aholi": "Population: 3.3 million",
+            "hudud": "Regions: Multiple areas and districts",
+            "shaxarlar": "Cities: Dubai, Abu Dhabi",
+            "valyuta": "Currency: UAE Dirham (AED)",
+            "btn1": "Close",
+            "btn2": "Contact"
+        },
+        {
+            "id": 5,
+            "img": "/slider_5.jpg",
+            "title": "Maldives",
+            "text": "Los Angeles offers a vibrant culture and famous landmarks like Hollywood.",
+            "aholi": "Population: 3.9 million",
+            "hudud": "Regions: Central, Hollywood, Santa Monica",
+            "shaxarlar": "Cities: Los Angeles, Santa Monica, Beverly Hills",
+            "valyuta": "Currency: US Dollar (USD)",
+            "btn1": "Close",
+            "btn2": "Contact"
+        },
+        {
+            "id": 6,
+            "img": "/slider_6.jpg",
+            "title": "Tropical Thailand",
+            "text": "Relax on beautiful beaches",
+            "aholi": "Population: 69.8 million",
+            "hudud": "Regions: 76 provinces",
+            "shaxarlar": "Cities: Bangkok, Chiang Mai, Phuket",
+            "valyuta": "Currency: Thai Baht (THB)",
+            "btn1": "Close",
+            "btn2": "Contact"
+        },
+        {
+            "id": 7,
+            "img": "/slider_7.jpg",
+            "title": "Magical Türkiye",
+            "text": "Magical Türkiye",
+            "aholi": "Population: 84 million",
+            "hudud": "Regions: 81 provinces",
+            "shaxarlar": "Cities: Istanbul, Ankara, Izmir",
+            "valyuta": "Currency: Turkish Lira (TRY)",
+            "btn1": "Close",
+            "btn2": "Contact"
+        }
+    ]
+}

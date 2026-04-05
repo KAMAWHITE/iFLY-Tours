@@ -1,0 +1,39 @@
+{
+    "Hero": [
+        {
+            "image": "/slider_1.jpg",
+            "title": "Discover China",
+            "desc": "China: Ancient history, the Great Wall, innovation, vibrant culture."
+        },
+        {
+            "image": "/slider_2.jpg",
+            "title": "Island Getaway",
+            "desc": "Feel serenity amidst stunning island landscapes."
+        },
+        {
+            "image": "/slider_3.jpg",
+            "title": "Japan",
+            "desc": "A land of modern living and ancient traditions."
+        },
+        {
+            "image": "/slider_4.jpg",
+            "title": "Discover Dubai",
+            "desc": "Uncover luxury, innovation, and adventure in the United Arab Emirates."
+        },
+        {
+            "image": "/slider_5.jpg",
+            "title": "Magical City",
+            "desc": "Immerse yourself in the entertainment capital of the world."
+        },
+        {
+            "image": "/slider_6.jpg",
+            "title": "Tropical Thailand",
+            "desc": "Relax on beautiful beaches and taste delicious food."
+        },
+        {
+            "image": "/slider_7.jpg",
+            "title": "Magical Turkey",
+            "desc": "Explore Turkey's rich history and breathtaking landscapes."
+        }
+    ]
+}

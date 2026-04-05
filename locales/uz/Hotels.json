@@ -1,0 +1,35 @@
+{
+    "BigTitle": "Orzungizdagi dam olish maskanini toping",
+    "SearchInput": "Mehmonxona yoki shahar bo'yicha qidirish...",
+    "selectors": {
+        "sel_0": "Barcha shaharlar",
+        "sel_1": "Rim",
+        "sel_2": "Giza",
+        "sel_3": "Kioto",
+        "sel_4": "Petra",
+        "sel_5": "Machu-Pikchu",
+        "sel_6": "Maldiv orollari",
+        "sel_7": "Bora-Bora",
+        "sel_8": "Bali",
+        "sel_9": "Santorini",
+        "sel_10": "Amalfi qirg'og'i",
+        "sel_11": "Dubay",
+        "sel_12": "Nyu-York",
+        "sel_13": "Parij",
+        "sel_14": "Tokio",
+        "sel_15": "London",
+        "sel_16": "Islandiya",
+        "sel_17": "Banf milliy bog'i",
+        "sel_18": "Kappadokiya",
+        "sel_19": "Serengeti",
+        "sel_20": "Shveytsariya Alplari"
+    },
+    "modal": {
+        "from": "Kelish sanasi",
+        "to": "Ketish sanasi",
+        "duration": "Davomiyligi",
+        "duration_time": "tun",
+        "total_price": "Umumiy narx",
+        "book_now": "Band qilish"
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "Hero": [
+        {
+            "image": "/slider_1.jpg",
+            "title": "Xitoyni kashf eting",
+            "desc": "Xitoy: qadimiy tarix, Buyuk devor, innovatsiyalar, rang-barang madaniyat."
+        },
+        {
+            "image": "/slider_2.jpg",
+            "title": "Oroldagi dam olish",
+            "desc": "Ajoyib orol manzaralarida tinchlikni his qiling."
+        },
+        {
+            "image": "/slider_3.jpg",
+            "title": "Yaponiya",
+            "desc": "Zamonaviy hayot va qadimiy an'analar mamlakati."
+        },
+        {
+            "image": "/slider_4.jpg",
+            "title": "Dubayni kashf eting",
+            "desc": "Birlashgan Arab Amirliklarida hashamat, innovatsiya va sarguzashtni kashf eting."
+        },
+        {
+            "image": "/slider_5.jpg",
+            "title": "Malakali shahar",
+            "desc": "Dunyoning ko'ngilochar poytaxtiga sho'ng'ing."
+        },
+        {
+            "image": "/slider_6.jpg",
+            "title": "Tropik Tailand",
+            "desc": "Chiroyli plyajlarda dam oling va mazali taomlarni tatib ko'ring."
+        },
+        {
+            "image": "/slider_7.jpg",
+            "title": "Sehrli Turkiya",
+            "desc": "Turkiyaning boy tarixi va ajoyib manzaralarini kashf eting."
+        }
+    ]
+}

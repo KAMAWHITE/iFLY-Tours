@@ -1,0 +1,35 @@
+{
+    "BigTitle": "Find your dream stay",
+    "SearchInput": "Search by hotel or city...",
+    "selectors": {
+        "sel_0": "All Cities",
+        "sel_1": "Rome",
+        "sel_2": "Giza",
+        "sel_3": "Kyoto",
+        "sel_4": "Petra",
+        "sel_5": "Machu Picchu",
+        "sel_6": "Maldives",
+        "sel_7": "Bora Bora",
+        "sel_8": "Bali",
+        "sel_9": "Santorini",
+        "sel_10": "Amalfi Coast",
+        "sel_11": "Dubai",
+        "sel_12": "New York",
+        "sel_13": "Paris",
+        "sel_14": "Tokyo",
+        "sel_15": "London",
+        "sel_16": "Iceland",
+        "sel_17": "Banff National Park",
+        "sel_18": "Cappadocia",
+        "sel_19": "Serengeti",
+        "sel_20": "Swiss Alps"
+    },
+    "modal": {
+        "from": "Check-in",
+        "to": "Check-out",
+        "duration": "Duration",
+        "duration_time": "night(s)",
+        "total_price": "Total price",
+        "book_now": "Book now"
+    }
+}
