@@ -56,5 +56,7 @@
     "sel_18": "Cappadocia",
     "sel_19": "Serengeti",
     "sel_20": "Swiss Alps"
-  }
+  },
+  "payment_message": "Payment should have been made here",
+  "redirecting": "Redirecting to profile..."
 }

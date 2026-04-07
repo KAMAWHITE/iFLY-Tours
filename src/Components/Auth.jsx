@@ -14,6 +14,8 @@ import {
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { Eye, EyeOff, Plane, ArrowRight, Mail, Lock, User } from "lucide-react";
 import Image from "next/image";
+import toast from "react-hot-toast";
+import Loading from "@/Components/Common/Loading";
 
 /* ── translations ── */
 const T = {
@@ -119,11 +121,11 @@ export default function AuthPage() {
     const secureRedirect = () => window.location.replace("/");
 
     const handleForgotPassword = async () => {
-        if (!formData.email) { alert(t.enterEmail); return; }
+        if (!formData.email) { toast.error(t.enterEmail); return; }
         try {
             await sendPasswordResetEmail(auth, formData.email.trim());
-            alert(t.resetSent);
-        } catch (error) { alert(error.message); }
+            toast.success(t.resetSent);
+        } catch (error) { toast.error(error.message); }
     };
 
     const handleGoogleAuth = async () => {
@@ -145,7 +147,7 @@ export default function AuthPage() {
             }, { merge: true });
             secureRedirect();
         } catch (error) {
-            if (error.code !== "auth/cancelled-popup-request") alert("Xatolik yuz berdi");
+            if (error.code !== "auth/cancelled-popup-request") toast.error(lang === "uz" ? "Xatolik yuz berdi" : lang === "ru" ? "Произошла ошибка" : "An error occurred");
             setLoading(false);
         }
     };
@@ -191,9 +193,9 @@ export default function AuthPage() {
         } catch (error) {
             console.error(error);
             if (error.code !== "auth/cancelled-popup-request") {
-                alert(error.code === "auth/account-exists-with-different-credential" 
-                    ? "Ushbu email boshqa kirish usuli bilan bog'langan." 
-                    : "Xatolik yuz berdi");
+                toast.error(error.code === "auth/account-exists-with-different-credential" 
+                    ? (lang === "uz" ? "Ushbu email boshqa kirish usuli bilan bog'langan." : lang === "ru" ? "Этот адрес электронной почты связан с другим методом входа." : "This email is linked to a different sign-in method.") 
+                    : (lang === "uz" ? "Xatolik yuz berdi" : lang === "ru" ? "Произошла ошибка" : "An error occurred"));
             }
             setLoading(false);
         }
@@ -220,7 +222,7 @@ export default function AuthPage() {
             }
             secureRedirect();
         } catch (error) {
-            alert(error.message);
+            toast.error(error.message);
             setLoading(false);
         }
     };
@@ -233,6 +235,7 @@ export default function AuthPage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-orange-50 via-rose-50 to-pink-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 flex items-center justify-center p-4">
+            {loading && <Loading fullScreen={true} text={t.loading} />}
             {/* Language chooser — top right */}
             <div className="fixed top-4 right-4 flex gap-1.5 z-50">
                 {languages.map((l) => (

@@ -5,8 +5,10 @@ import { db, auth } from "../../lib/firebase";
 import { FaSearch, FaMapMarkerAlt, FaTimes, FaCalendarAlt } from "react-icons/fa";
 import { useApp } from "../../app/LanguageContext";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 import HotelsUz from "../../../locales/uz/Hotels.json";
+import Loading from "../Common/Loading";
 import HotelsEn from "../../../locales/en/Hotels.json";
 import HotelsRu from "../../../locales/ru/Hotels.json";
 
@@ -72,13 +74,13 @@ export default function Hotels() {
     const handleBookHotel = async (hotel) => {
         const user = auth.currentUser;
         if (!user) {
-            alert(language === "uz" ? "Boss, avval tizimga kirishingiz kerak!" : "Please login first!");
+            toast.error(til === "uz" ? "Boss, avval tizimga kirishingiz kerak!" : til === "ru" ? "Босс, сначала нужно войти в систему!" : "Please login first!");
             router.push("/auth");
             return;
         }
 
         if (!checkIn || !checkOut) {
-            alert(language === "uz" ? "Sanalarni tanlang!" : "Select dates!");
+            toast.error(til === "uz" ? "Sanalarni tanlang!" : til === "ru" ? "Выберите даты!" : "Select dates!");
             return;
         }
 
@@ -99,11 +101,11 @@ export default function Hotels() {
                 checkOut,
                 bookedAt: serverTimestamp(),
             });
-            alert(language === "uz" ? "Muvaffaqiyatli band qilindi!" : "Successfully booked!");
+            toast.success(til === "uz" ? "Muvaffaqiyatli band qilindi!" : til === "ru" ? "Успешно забронировано!" : "Successfully booked!");
             setSelectedHotel(null);
             router.push("/profile");
         } catch (error) {
-            alert("Error: " + error.message);
+            toast.error("Error: " + error.message);
         } finally {
             setBookingLoading(false);
         }
@@ -120,14 +122,7 @@ export default function Hotels() {
         });
     }, [searchQuery, selectedCity, hotels, til]);
 
-    if (loading) return (
-        <div className={`min-h-screen flex flex-col items-center justify-center gap-5 ${darkMode ? "bg-slate-950" : "bg-gray-50"}`}>
-            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin-smooth" />
-            <p className={`text-sm font-semibold ${darkMode ? "text-slate-500" : "text-gray-400"}`}>
-                {til === "ru" ? "Загрузка..." : til === "en" ? "Loading..." : "Yuklanmoqda..."}
-            </p>
-        </div>
-    );
+    if (loading) return <Loading fullScreen={true} text={til === "ru" ? "Загрузка..." : til === "en" ? "Loading..." : "Yuklanmoqda..."} />;
 
     return (
         <div className={`min-h-screen w-full pb-20 ${darkMode ? "bg-slate-950 text-white" : "bg-gray-50 text-gray-900"}`}>

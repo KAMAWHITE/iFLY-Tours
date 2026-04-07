@@ -10,6 +10,7 @@ import InfoUz from "../../../../locales/uz/Info.json";
 import InfoRu from "../../../../locales/ru/Info.json";
 import InfoEn from "../../../../locales/en/Info.json";
 import { X, Users, MapPin, Building2, Coins, Globe, ArrowRight } from "lucide-react";
+import Loading from "@/Components/Common/Loading";
 
 const CountryInfo = () => {
     const { til, darkMode } = useApp();
@@ -146,11 +147,12 @@ const CountryInfo = () => {
                             </div>
                         </div>
                     )) : (
-                        <div className="col-span-full flex flex-col items-center py-20 gap-4">
-                            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
-                            <p className={`text-sm font-bold ${darkMode ? "text-slate-500" : "text-gray-400"}`}>
-                                {til === "ru" ? "Загрузка направлений..." : til === "en" ? "Loading destinations..." : "Yo'nalishlar yuklanmoqda..."}
-                            </p>
+                        <div className="col-span-full py-20">
+                            <Loading 
+                                fullScreen={false} 
+                                size={120} 
+                                text={til === "ru" ? "Загрузка направлений..." : til === "en" ? "Loading destinations..." : "Yo'nalishlar yuklanmoqda..."} 
+                            />
                         </div>
                     )}
                 </div>

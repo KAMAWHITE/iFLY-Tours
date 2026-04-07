@@ -6,7 +6,9 @@ import {
 import { useApp } from "../../app/LanguageContext";
 import { useRouter } from "next/navigation";
 import { db, auth } from "../../lib/firebase";
-import { collection, addDoc, serverTimestamp, getDocs } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, getDocs, updateDoc, doc, arrayUnion } from "firebase/firestore";
+import toast from "react-hot-toast";
+import Loading from "../Common/Loading";
 
 import FlightsUz from "../../../locales/uz/Flights.json";
 import FlightsRu from "../../../locales/ru/Flights.json";
@@ -72,7 +74,7 @@ function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) 
                                 <span className="w-5 text-[10px] font-black text-gray-400">{row}</span>
                                 {["A", "B", "C", "D", "E", "F"].map((col, idx) => {
                                     const id = `${row}${col}`;
-                                    const taken = flight.occupiedSeats?.includes(id);
+                                    const taken = Array.isArray(flight.occupiedSeats) && flight.occupiedSeats.includes(id);
                                     return (
                                         <React.Fragment key={col}>
                                             <button disabled={taken} onClick={() => setSel(id)}
@@ -105,6 +107,54 @@ function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) 
                                 : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
                         {t.confirmSeat}
                     </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+// ─── To'lov modali (Simulyatsiya) ──────────────────────────────────────────────
+function PaymentModal({ isOpen, t, countdown }) {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/80 backdrop-blur-xl p-4">
+            <div className="w-full max-w-lg bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-[40px] p-10 text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,165,0,0.2)] border border-white/10">
+                {/* Background Decorations */}
+                <div className="absolute -top-24 -left-24 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl animate-pulse" />
+
+                {/* Content */}
+                <div className="relative z-10 space-y-6">
+                    <div className="flex justify-center">
+                        <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(249,115,22,0.5)] animate-bounce">
+                            <span className="text-4xl text-white">💳</span>
+                        </div>
+                    </div>
+
+                    <div className="space-y-2">
+                        <h3 className="text-3xl font-black text-white">{t.payment_message}</h3>
+                        <p className="text-orange-400 font-bold uppercase tracking-[0.2em] text-xs">
+                            {t.redirecting}
+                        </p>
+                    </div>
+
+                    <div className="flex justify-center items-center gap-4">
+                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl font-black text-orange-500">
+                            {countdown}
+                        </div>
+                    </div>
+
+                    <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div 
+                            className="bg-gradient-to-r from-orange-500 to-rose-500 h-full transition-all duration-1000 ease-linear"
+                            style={{ width: `${(countdown / 5) * 100}%` }}
+                        />
+                    </div>
+
+                    <p className="text-gray-400 text-xs font-medium">
+                        iFLY-Tours Premium Experience
+                    </p>
                 </div>
             </div>
         </div>
@@ -163,8 +213,8 @@ function FlightCard({ flight, til, darkMode, t, isSelected, onSelect }) {
 // ─── Reys ro'yxati ───────────────────────────────────────────────────────────
 function FlightList({ flights, loading, darkMode, til, t, selectedId, onSelect }) {
     if (loading) return (
-        <div className="flex flex-col items-center py-16 gap-4">
-            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin" />
+        <div className="py-16">
+            <Loading fullScreen={false} size={150} text={t.loading || "Yuklanmoqda..."} />
         </div>
     );
     if (!flights.length) return (
@@ -206,6 +256,22 @@ export default function FlightsPage() {
     const [selectedDep, setSelectedDep] = useState(null);
     const [selectedRet, setSelectedRet] = useState(null);
     const [modal, setModal] = useState({ open: false, flight: null, direction: null });
+
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
+    const [countdown, setCountdown] = useState(5);
+
+    // ── Payment Modal Timer & Redirect ──
+    useEffect(() => {
+        let timer;
+        if (showPaymentModal && countdown > 0) {
+            timer = setInterval(() => {
+                setCountdown((prev) => prev - 1);
+            }, 1000);
+        } else if (showPaymentModal && countdown === 0) {
+            router.push("/profile");
+        }
+        return () => clearInterval(timer);
+    }, [showPaymentModal, countdown, router]);
 
     useEffect(() => {
         (async () => {
@@ -296,39 +362,71 @@ export default function FlightsPage() {
         setAppliedQuery(null); setSelectedDep(null); setSelectedRet(null);
     }, []);
 
-    const handleSeatConfirm = useCallback((flight, seat) => {
-        if (modal.direction === "dep") setSelectedDep({ flight, seat });
-        if (modal.direction === "ret") setSelectedRet({ flight, seat });
-        setModal({ open: false, flight: null, direction: null });
-    }, [modal.direction]);
+    const executeBooking = useCallback(async (dep, ret) => {
+        const user = auth.currentUser;
+        if (!user) { toast.error(t.no_token); return; }
+        try {
+            const col = collection(db, "bookings");
+            if (tripType === "roundTrip" && dep?.flight && ret?.flight) {
+                const depId = String(dep.flight.id || dep.flight.firebaseId || "");
+                const retId = String(ret.flight.id || ret.flight.firebaseId || "");
+
+                if (!depId || !retId) throw new Error("Flight ID missing");
+
+                await Promise.all([
+                    addDoc(col, buildDoc(user.uid, dep.flight, dep.seat, {
+                        tripType: "roundTrip", direction: "departure",
+                        linkedFlightDate: ret.flight.date,
+                    })),
+                    addDoc(col, buildDoc(user.uid, ret.flight, ret.seat, {
+                        tripType: "roundTrip", direction: "return",
+                        linkedFlightDate: dep.flight.date,
+                    })),
+                    updateDoc(doc(db, "flights", depId), {
+                        occupiedSeats: arrayUnion(dep.seat)
+                    }),
+                    updateDoc(doc(db, "flights", retId), {
+                        occupiedSeats: arrayUnion(ret.seat)
+                    })
+                ]);
+            } else if (tripType === "oneWay" && dep?.flight) {
+                const depId = String(dep.flight.id || dep.flight.firebaseId || "");
+                if (!depId) throw new Error("Flight ID missing");
+
+                await Promise.all([
+                    addDoc(col, buildDoc(user.uid, dep.flight, dep.seat, {
+                        tripType: "oneWay",
+                    })),
+                    updateDoc(doc(db, "flights", depId), {
+                        occupiedSeats: arrayUnion(dep.seat)
+                    })
+                ]);
+            }
+            toast.success(t.complate);
+            
+            // Trigger Payment Simulation (Timer handled by useEffect)
+            setShowPaymentModal(true);
+
+        } catch (e) { console.error(e); toast.error(t.error); }
+    }, [tripType, t, router]);
+
+    const handleBook = useCallback(() => executeBooking(selectedDep, selectedRet), [executeBooking, selectedDep, selectedRet]);
 
     const canBook = tripType === "oneWay" ? !!selectedDep : !!(selectedDep && selectedRet);
 
-    const handleBook = useCallback(async () => {
-        const user = auth.currentUser;
-        if (!user) { alert(t.no_token); return; }
-        try {
-            const col = collection(db, "bookings");
-            if (tripType === "roundTrip" && selectedDep && selectedRet) {
-                await Promise.all([
-                    addDoc(col, buildDoc(user.uid, selectedDep.flight, selectedDep.seat, {
-                        tripType: "roundTrip", direction: "departure",
-                        linkedFlightDate: selectedRet.flight.date,
-                    })),
-                    addDoc(col, buildDoc(user.uid, selectedRet.flight, selectedRet.seat, {
-                        tripType: "roundTrip", direction: "return",
-                        linkedFlightDate: selectedDep.flight.date,
-                    })),
-                ]);
-            } else if (tripType === "oneWay" && selectedDep) {
-                await addDoc(col, buildDoc(user.uid, selectedDep.flight, selectedDep.seat, {
-                    tripType: "oneWay",
-                }));
+    const handleSeatConfirm = useCallback((flight, seat) => {
+        if (modal.direction === "dep") {
+            const depData = { flight, seat };
+            setSelectedDep(depData);
+            if (tripType === "oneWay") {
+                executeBooking(depData, null);
             }
-            alert(t.complate);
-            router.push("/profile");
-        } catch (e) { console.error(e); alert(t.error); }
-    }, [tripType, selectedDep, selectedRet, t, router]);
+        }
+        if (modal.direction === "ret") {
+            setSelectedRet({ flight, seat });
+        }
+        setModal({ open: false, flight: null, direction: null });
+    }, [modal.direction, tripType, executeBooking]);
 
     const sectionLabel = useMemo(() => {
         const dest = destKey ? t.selectors[destKey] : "*";
@@ -615,7 +713,7 @@ export default function FlightsPage() {
                         <button onClick={handleBook}
                             className="px-10 py-4 rounded-2xl font-black bg-orange-500 hover:bg-orange-600
                                 text-white shadow-lg active:scale-95 transition-all">
-                            {t.confirmSeat ?? "Buyurtma berish"}
+                            {t.bookNow ?? "Buyurtma berish"}
                         </button>
                     </div>
                 )}
@@ -630,6 +728,13 @@ export default function FlightsPage() {
                 darkMode={darkMode}
                 t={t}
                 til={til}
+            />
+
+            {/* Payment Modal */}
+            <PaymentModal 
+                isOpen={showPaymentModal}
+                t={t}
+                countdown={countdown}
             />
         </div>
     );

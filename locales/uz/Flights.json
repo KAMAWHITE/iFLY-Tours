@@ -56,5 +56,7 @@
     "sel_18": "Kapadokiya",
     "sel_19": "Seregenti",
     "sel_20": "Shveytsariya Alplari"
-  }
+  },
+  "payment_message": "Shu yerda to'lov qilinishi kerak edi",
+  "redirecting": "Profilga yo'naltirilmoqda..."
 }

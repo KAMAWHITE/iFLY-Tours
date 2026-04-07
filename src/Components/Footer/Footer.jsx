@@ -16,37 +16,38 @@ const Footer = () => {
         switch (til) {
             case "ru": return FooterRu;
             case "en": return FooterEn;
-            default:   return FooterUz;
+            default: return FooterUz;
         }
     };
 
     const f = getContent();
 
     const socials = [
-        { icon: <FaInstagram size={16} />, href: "#", label: "Instagram", gradient: "from-pink-500 to-rose-500" },
-        { icon: <FaTelegramPlane size={16} />, href: "#", label: "Telegram", gradient: "from-sky-500 to-blue-600" },
-        { icon: <FaFacebookF size={16} />, href: "#", label: "Facebook", gradient: "from-blue-600 to-indigo-600" },
-        { icon: <FaYoutube size={16} />, href: "#", label: "YouTube", gradient: "from-red-500 to-rose-600" },
+        { icon: <FaInstagram size={16} />, href: "https://www.instagram.com/", label: "Instagram", gradient: "from-pink-500 to-rose-500" },
+        { icon: <FaTelegramPlane size={16} />, href: "https://web.telegram.org/", label: "Telegram", gradient: "from-sky-500 to-blue-600" },
+        { icon: <FaFacebookF size={16} />, href: "https://www.facebook.com/", label: "Facebook", gradient: "from-blue-600 to-indigo-600" },
+        { icon: <FaYoutube size={16} />, href: "https://www.youtube.com/", label: "YouTube", gradient: "from-red-500 to-rose-600" },
     ];
 
     const navLinks = [
         { label: f.link_1, href: "/" },
-        { label: f.link_2, href: "/" },
+        { label: f.link_2, href: "/flights" },
+        { label: f.link_3, href: "/hotels" },
+        { label: f.link_4, href: "/profile" },
     ];
 
     const destinations = [
-        { label: f.europa,    href: "/" },
-        { label: f.america,   href: "/" },
-        { label: f.asia,      href: "/" },
-        { label: f.africa,    href: "/" },
+        { label: f.europa, href: "/" },
+        { label: f.america, href: "/" },
+        { label: f.asia, href: "/" },
+        { label: f.africa, href: "/" },
     ];
 
     return (
-        <footer className={`relative overflow-hidden ${
-            darkMode
-                ? "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white"
-                : "bg-gradient-to-br from-gray-900 via-slate-900 to-gray-950 text-white"
-        }`}>
+        <footer className={`relative overflow-hidden ${darkMode
+            ? "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white"
+            : "bg-gradient-to-br from-gray-900 via-slate-900 to-gray-950 text-white"
+            }`}>
             {/* Top gradient accent */}
             <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent" />
 
@@ -142,8 +143,8 @@ const Footer = () => {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Mail size={15} className="text-orange-400 flex-shrink-0" />
-                                <a href="mailto:info@iflytours.uz" className="text-sm text-white/55 hover:text-white transition-colors">
-                                    info@iflytours.uz
+                                <a href="mailto:aminboyevkamronbek2005@gmail.com" className="text-sm text-white/55 hover:text-white transition-colors">
+                                    aminboyevkamronbek2005@gmail.com
                                 </a>
                             </li>
                         </ul>

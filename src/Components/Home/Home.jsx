@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 import SwiperCarousel from "@/Components/Home/SwiperCarousel/SwiperCarousel";
 import CountryInfo from "@/Components/Home/CountryInfo/CountryInfo";
 import AboutUs from "@/Components/Home/AboutUs/AboutUs";
+import Loading from "@/Components/Common/Loading";
 
-const Page = () => {
+export default function HomeContent() {
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
@@ -29,13 +30,7 @@ const Page = () => {
     }, [router]);
 
     // Auth holati aniq bo'lguncha hech narsa ko'rsatmaymiz (yoki Spinner qo'yamiz)
-    if (loading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center bg-[#f5f0e8]">
-                <p className="text-[#1c1612] font-medium">Yuklanmoqda, Boss...</p>
-            </div>
-        );
-    }
+    if (loading) return <Loading fullScreen={true} text="Yuklanmoqda, Boss..." />;
 
     return (
         <div>
@@ -45,5 +40,3 @@ const Page = () => {
         </div>
     );
 };
-
-export default Page;

@@ -10,6 +10,7 @@ import { useApp } from "../../../app/LanguageContext";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { MapPin } from "lucide-react";
+import Loading from "@/Components/Common/Loading";
 
 export default function SwiperCarousel() {
     const { til, darkMode } = useApp();
@@ -36,15 +37,7 @@ export default function SwiperCarousel() {
         fetchSlides();
     }, []);
 
-    if (loading) {
-        return (
-            <div className="w-full h-[100svh] flex items-center justify-center bg-black">
-                <div className="animate-pulse text-white font-bold tracking-widest uppercase">
-                    IFLY TOURS...
-                </div>
-            </div>
-        );
-    }
+    if (loading) return <Loading fullScreen={true} text="IFLY TOURS..." />;
 
     return (
         <div className="relative w-full">

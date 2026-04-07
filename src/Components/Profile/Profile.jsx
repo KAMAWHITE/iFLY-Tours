@@ -6,6 +6,7 @@ import { doc, getDoc, collection, query, where, getDocs, orderBy } from "firebas
 import { useRouter } from "next/navigation";
 import { FaSignOutAlt, FaPlane, FaHotel, FaStar, FaMapMarkerAlt, FaUserCircle, FaMoon, FaSun, FaCalendarAlt, FaClock } from "react-icons/fa";
 import { useApp } from "../../app/LanguageContext";
+import Loading from "../Common/Loading";
 
 export default function ProfilePage() {
     const router = useRouter();
@@ -69,12 +70,7 @@ export default function ProfilePage() {
         }
     };
 
-    if (loading) return (
-        <div className={`min-h-screen flex flex-col items-center justify-center gap-5 ${darkMode ? "bg-slate-950" : "bg-gray-50"}`}>
-            <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin-smooth" />
-            <p className={`text-sm font-semibold ${darkMode ? "text-slate-500" : "text-gray-400"}`}>Loading Dashboard...</p>
-        </div>
-    );
+    if (loading) return <Loading fullScreen={true} text={til === "ru" ? "Загрузка..." : til === "en" ? "Loading Dashboard..." : "Yuklanmoqda..."} />;
 
     return (
         <div className={`min-h-screen transition-colors duration-500 ${darkMode ? "bg-slate-950 text-white" : "bg-gray-50 text-gray-900"} p-4 md:p-6 pt-24`}>
