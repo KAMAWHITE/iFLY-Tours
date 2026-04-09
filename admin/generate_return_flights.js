@@ -8,19 +8,18 @@ const originalFlights = flightsData.flights;
 console.log(`📡 Mavjud borish reyslari: ${originalFlights.length} ta.`);
 
 const returnFlights = originalFlights.map(f => {
-    // Sanani 2 kunga suramiz (qaytish mantiqan keyinroq bo'lishi uchun)
     const departureDate = new Date(f.date);
     departureDate.setDate(departureDate.getDate() + 2);
     const returnDateStr = departureDate.toISOString().split('T')[0];
 
     return {
         ...f,
-        id: f.id + 100, // ID ni 100 dan boshlaymiz (duplikat bo'lmasligi uchun)
-        from: f.to,     // Destination -> Toshkent
+        id: f.id + 100,
+        from: f.to,
         to: f.from,
         date: returnDateStr,
-        price: Math.floor(f.price * 0.95), // Qaytish biroz arzonroq bo'lsin
-        occupiedSeats: [] // Yangi reys, hamma joy bo'sh
+        price: Math.floor(f.price * 0.95),
+        occupiedSeats: []
     };
 });
 

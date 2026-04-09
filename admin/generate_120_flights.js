@@ -43,7 +43,6 @@ for (let i = 1; i <= 20; i++) {
 const flights = [];
 let id = 1;
 
-// 1. Flights FROM Tashkent (60)
 destinations.forEach((dest, dIdx) => {
     dates.forEach((date, dateIdx) => {
         const companyIdx = (dIdx + dateIdx) % companies.length;
@@ -56,13 +55,12 @@ destinations.forEach((dest, dIdx) => {
             to: dest,
             date: date,
             time: times[timeIdx],
-            price: 2500000 + (dIdx * 200000) + (dateIdx * 100000), // Dynamic pricing
+            price: 2500000 + (dIdx * 200000) + (dateIdx * 100000),
             occupiedSeats: []
         });
     });
 });
 
-// 2. Flights TO Tashkent (60)
 destinations.forEach((dest, dIdx) => {
     dates.forEach((date, dateIdx) => {
         const companyIdx = (dIdx + dateIdx + 2) % companies.length;

@@ -1,33 +1,60 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/lib/firebase";
-import { useRouter } from "next/navigation";
-import Loading from "@/Components/Common/Loading";
 import HomeContent from "@/Components/Home/Home";
 
+export const metadata = {
+    title: "Bosh Sahifa — Arzon Parvozlar & Mehmonxonalar",
+    description:
+        "iFLY-Tours bosh sahifasi. Dunyoning istalgan shahriga arzon aviabiletlar va mehmonxonalarni bir joydan bron qiling. Eksklyuziv takliflar, qulay narxlar.",
+    openGraph: {
+        title: "iFLY-Tours — Bosh Sahifa",
+        description:
+            "Dunyoning istalgan shahriga arzon aviabiletlar va mehmonxonalarni bir joydan bron qiling.",
+        url: "https://ifly-tours.uz",
+        images: [
+            {
+                url: "/og-cover.png",
+                width: 1200,
+                height: 630,
+                alt: "iFLY-Tours Bosh Sahifa",
+            },
+        ],
+    },
+    alternates: {
+        canonical: "https://ifly-tours.uz",
+    },
+};
+
 export default function Page() {
-    const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null);
-    const router = useRouter();
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            if (!currentUser) {
-                // Foydalanuvchi yo'q bo'lsa, auth sahifasiga o'tish
-                router.replace("/auth");
-            } else {
-                setUser(currentUser);
-                setLoading(false);
-            }
-        });
-
-        return () => unsubscribe();
-    }, [router]);
-
-    if (loading) return <Loading fullScreen={true} />;
-
-
-    return <HomeContent user={user} />;
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "WebSite",
+                        name: "iFLY-Tours",
+                        url: "https://ifly-tours.uz",
+                        description:
+                            "O'zbekistonning eng qulay onlayn aviabilet va mehmonxona bron qilish platformasi.",
+                        potentialAction: {
+                            "@type": "SearchAction",
+                            target:
+                                "https://ifly-tours.uz/flights?q={search_term_string}",
+                            "query-input": "required name=search_term_string",
+                        },
+                        publisher: {
+                            "@type": "Organization",
+                            name: "iFLY-Tours",
+                            url: "https://ifly-tours.uz",
+                            logo: {
+                                "@type": "ImageObject",
+                                url: "https://ifly-tours.uz/logo.png",
+                            },
+                        },
+                    }),
+                }}
+            />
+            <HomeContent />
+        </>
+    );
 }

@@ -42,26 +42,23 @@ const CountryInfo = () => {
     }, []);
 
     const getModalContent = (country) => {
-        // Modal uchun qo'shimcha ma'lumotlar hali ham Info.json'dan kelishi mumkin
-        // Lekin biz Firestore'dan kelgan yangi maydonlarni (aholi, maydon, valyuta) prioritizatsiya qilamiz
         let d = {};
         try {
             const src = til === "ru" ? InfoRu : til === "en" ? InfoEn : InfoUz;
             d = src?.Country_info?.find((it) => it.id === country.id) || {};
         } catch { /* */ }
 
-        // Firestore dan kelgan ma'lumotlarni tilga qarab ajratamiz
         const translate = (field) => field?.[til] || field?.uz || "—";
 
         return {
-            img:       country.image || d.img || "/placeholder.jpg",
-            title:     translate(country.title) || d.title || "Noma'lum",
-            desc:      translate(country.desc) || d.text || "Ma'lumot topilmadi",
-            population:translate(country.population) || d.aholi || "—",
-            area:      translate(country.area) || d.hudud || "—",
-            cities:    d.shaxarlar || "—", // Shaxarlar hali firestore'da yo'q
-            currency:  translate(country.currency) || d.valyuta || "—",
-            closeBtn:  d.btn1 || (til === "ru" ? "ЗАКРЫТЬ" : til === "en" ? "CLOSE" : "YOPISH"),
+            img: country.image || d.img || "/placeholder.jpg",
+            title: translate(country.title) || d.title || "Noma'lum",
+            desc: translate(country.desc) || d.text || "Ma'lumot topilmadi",
+            population: translate(country.population) || d.aholi || "—",
+            area: translate(country.area) || d.hudud || "—",
+            cities: d.shaxarlar || "—",
+            currency: translate(country.currency) || d.valyuta || "—",
+            closeBtn: d.btn1 || (til === "ru" ? "ЗАКРЫТЬ" : til === "en" ? "CLOSE" : "YOPISH"),
         };
     };
 
@@ -80,11 +77,9 @@ const CountryInfo = () => {
     return (
         <section className={`py-16 sm:py-20 ${darkMode ? "bg-slate-900" : "bg-gray-50"}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6">
-                {/* Section Header */}
                 <div className="text-center mb-12" data-aos="fade-up">
-                    <div className={`inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border mb-4 ${
-                        darkMode ? "bg-slate-800 border-slate-700 text-orange-400" : "bg-orange-50 border-orange-100 text-orange-600"
-                    }`}>
+                    <div className={`inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border mb-4 ${darkMode ? "bg-slate-800 border-slate-700 text-orange-400" : "bg-orange-50 border-orange-100 text-orange-600"
+                        }`}>
                         <Globe size={13} />
                         {til === "ru" ? "Направления" : til === "en" ? "Destinations" : "Yo'nalishlar"}
                     </div>
@@ -93,20 +88,17 @@ const CountryInfo = () => {
                     </h2>
                 </div>
 
-                {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                     {!loading ? countries.map((country, i) => (
                         <div
                             key={country.firebaseId}
                             data-aos="fade-up"
                             data-aos-delay={`${(i % 4) * 80}`}
-                            className={`group flex flex-col rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border ${
-                                darkMode
-                                    ? "bg-slate-800 border-slate-700 hover:border-orange-500/30"
-                                    : "bg-white border-gray-100 hover:border-orange-200"
-                            }`}
+                            className={`group flex flex-col rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border ${darkMode
+                                ? "bg-slate-800 border-slate-700 hover:border-orange-500/30"
+                                : "bg-gray-200 border-gray-300 hover:border-orange-300"
+                                }`}
                         >
-                            {/* Image */}
                             <div className="relative h-48 overflow-hidden flex-shrink-0">
                                 <Image
                                     src={country.image}
@@ -116,7 +108,6 @@ const CountryInfo = () => {
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                {/* Country chip overlay */}
                                 <div className="absolute top-3 right-3">
                                     <span className="bg-black/40 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
                                         <MapPin size={9} />
@@ -125,7 +116,6 @@ const CountryInfo = () => {
                                 </div>
                             </div>
 
-                            {/* Content */}
                             <div className="p-5 flex flex-col flex-1">
                                 <h3 className={`font-black text-base leading-snug mb-2 ${darkMode ? "text-white" : "text-gray-900"}`}>
                                     {country.title?.[til] || country.title?.uz}
@@ -135,11 +125,10 @@ const CountryInfo = () => {
                                 </p>
                                 <button
                                     onClick={() => openModal(country)}
-                                    className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs tracking-wider uppercase transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 group/btn ${
-                                        darkMode
-                                            ? "bg-slate-700 text-white hover:bg-orange-500 border border-slate-600 hover:border-orange-500"
-                                            : "bg-gray-900 text-white hover:bg-orange-500"
-                                    }`}
+                                    className={`w-full py-2.5 px-4 rounded-xl font-bold text-xs tracking-wider uppercase transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 group/btn ${darkMode
+                                        ? "bg-slate-700 text-white hover:bg-orange-500 border border-slate-600 hover:border-orange-500"
+                                        : "bg-gray-900 text-white hover:bg-orange-500"
+                                        }`}
                                 >
                                     {til === "ru" ? "Подробнее" : til === "en" ? "Learn More" : "Batafsil"}
                                     <ArrowRight size={12} className="transition-transform group-hover/btn:translate-x-1" />
@@ -148,17 +137,16 @@ const CountryInfo = () => {
                         </div>
                     )) : (
                         <div className="col-span-full py-20">
-                            <Loading 
-                                fullScreen={false} 
-                                size={120} 
-                                text={til === "ru" ? "Загрузка направлений..." : til === "en" ? "Loading destinations..." : "Yo'nalishlar yuklanmoqda..."} 
+                            <Loading
+                                fullScreen={false}
+                                size={120}
+                                text={til === "ru" ? "Загрузка направлений..." : til === "en" ? "Loading destinations..." : "Yo'nalishlar yuklanmoqda..."}
                             />
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* ── MODAL ── */}
             {isModalOpen && selectedCountry && (() => {
                 const c = getModalContent(selectedCountry);
                 const stats = [
@@ -169,10 +157,8 @@ const CountryInfo = () => {
                 return (
                     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
                         <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" onClick={closeModal} />
-                        <div className={`relative w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden animate-fade-up ${
-                            darkMode ? "bg-slate-800" : "bg-white"
-                        }`}>
-                            {/* Hero image */}
+                        <div className={`relative w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden animate-fade-up ${darkMode ? "bg-slate-800" : "bg-white"
+                            }`}>
                             <div className="relative h-56 w-full">
                                 <Image src={c.img} alt={c.title} fill className="object-cover" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 to-black/10" />
@@ -190,13 +176,11 @@ const CountryInfo = () => {
                                 </div>
                             </div>
 
-                            {/* Body */}
                             <div className="p-6">
                                 <p className={`text-sm leading-relaxed mb-6 italic ${darkMode ? "text-slate-400" : "text-gray-500"}`}>
                                     "{c.desc}"
                                 </p>
 
-                                {/* Stats grid */}
                                 <div className="grid grid-cols-2 gap-3 mb-6">
                                     {stats.map((s, i) => {
                                         const { label: parsedLabel, value } = parseField(s.raw);
@@ -204,9 +188,8 @@ const CountryInfo = () => {
                                         return (
                                             <div
                                                 key={i}
-                                                className={`flex items-start gap-3 p-3 rounded-2xl border-l-4 border-orange-500 ${
-                                                    darkMode ? "bg-slate-700" : "bg-orange-50"
-                                                }`}
+                                                className={`flex items-start gap-3 p-3 rounded-2xl border-l-4 border-orange-500 ${darkMode ? "bg-slate-700" : "bg-orange-50"
+                                                    }`}
                                             >
                                                 <span className={`mt-0.5 flex-shrink-0 ${darkMode ? "text-orange-400" : "text-orange-500"}`}>{s.icon}</span>
                                                 <div>

@@ -15,13 +15,10 @@ export default function HomeContent() {
     const router = useRouter();
 
     useEffect(() => {
-        // Firebase auth holatini kuzatamiz
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (!user) {
-                // Agar foydalanuvchi login qilmagan bo'lsa, auth sahifasiga qaytaramiz
                 router.push("/auth");
             } else {
-                // Agar foydalanuvchi bo'lsa, yuklashni to'xtatamiz
                 setLoading(false);
             }
         });
@@ -29,7 +26,6 @@ export default function HomeContent() {
         return () => unsubscribe();
     }, [router]);
 
-    // Auth holati aniq bo'lguncha hech narsa ko'rsatmaymiz (yoki Spinner qo'yamiz)
     if (loading) return <Loading fullScreen={true} text="Yuklanmoqda, Boss..." />;
 
     return (

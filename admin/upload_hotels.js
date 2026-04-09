@@ -10,7 +10,6 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-// JSON faylingiz yo'lini tekshirib oling
 const hotelsData = JSON.parse(fs.readFileSync("./data/hotels_db.json", "utf8"));
 
 async function uploadHotelsData() {
@@ -18,19 +17,17 @@ async function uploadHotelsData() {
   const batch = db.batch();
 
   hotels.forEach((hotel) => {
-    // Har bir mehmonxona uchun yangi document referensi
-    const docRef = db.collection("hotels").doc(); 
-    
+    const docRef = db.collection("hotels").doc();
+
     batch.set(docRef, {
       id: hotel.id,
       name: hotel.name,
-      city: hotel.city, // Bu yerda {uz, ru, en} ob'ekti saqlanadi
+      city: hotel.city,
       price: Number(hotel.price),
       rating: Number(hotel.rating),
       reviews: Number(hotel.reviews),
       image: hotel.image,
       featured: hotel.featured || false,
-      // Agar qo'shimcha qulayliklar bo'lsa:
       amenities: hotel.amenities || [],
       createdAt: admin.firestore.FieldValue.serverTimestamp()
     });

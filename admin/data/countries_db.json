@@ -3,262 +3,582 @@
     {
       "id": 1,
       "image": "/slider_1.jpg",
-      "title": { "uz": "Rim, Italiya", "ru": "Рим, Италия", "en": "Rome, Italy" },
+      "title": {
+        "uz": "Rim, Italiya",
+        "ru": "Рим, Италия",
+        "en": "Rome, Italy"
+      },
       "desc": {
         "uz": "\"Abadiy shahar\". Kolizey, Panteon va eng mazali pitsalar maskani.",
         "ru": "«Вечный город». Обитель Колизея, Пантеона и самой вкусной пиццы.",
         "en": "The \"Eternal City.\" Home to the Colosseum, Pantheon, and the world's most delicious pizza."
       },
-      "population": { "uz": "58.9 million", "ru": "58.9 млн", "en": "58.9 million" },
-      "area": { "uz": "301,340 km²", "ru": "301,340 км²", "en": "301,340 km²" },
-      "currency": { "uz": "Yevro (EUR)", "ru": "Евро (EUR)", "en": "Euro (EUR)" }
+      "population": {
+        "uz": "58.9 million",
+        "ru": "58.9 млн",
+        "en": "58.9 million"
+      },
+      "area": {
+        "uz": "301,340 km²",
+        "ru": "301,340 км²",
+        "en": "301,340 km²"
+      },
+      "currency": {
+        "uz": "Yevro (EUR)",
+        "ru": "Евро (EUR)",
+        "en": "Euro (EUR)"
+      }
     },
     {
       "id": 2,
       "image": "/slider_2.jpg",
-      "title": { "uz": "Giza, Misr", "ru": "Гиза, Египет", "en": "Giza, Egypt" },
+      "title": {
+        "uz": "Giza, Misr",
+        "ru": "Гиза, Египет",
+        "en": "Giza, Egypt"
+      },
       "desc": {
         "uz": "Dunyoning qadimiy mo'jizasi bo'lgan ehromlar (Piramidalar).",
         "ru": "Древнее чудо света — великие пирамиды.",
         "en": "Ancient wonder of the world: The Great Pyramids."
       },
-      "population": { "uz": "114 million", "ru": "114 млн", "en": "114 million" },
-      "area": { "uz": "1,010,408 km²", "ru": "1,010,408 км²", "en": "1,010,408 km²" },
-      "currency": { "uz": "Misr funti (EGP)", "ru": "Египетский фунт (EGP)", "en": "Egyptian Pound (EGP)" }
+      "population": {
+        "uz": "114 million",
+        "ru": "114 млн",
+        "en": "114 million"
+      },
+      "area": {
+        "uz": "1,010,408 km²",
+        "ru": "1,010,408 км²",
+        "en": "1,010,408 km²"
+      },
+      "currency": {
+        "uz": "Misr funti (EGP)",
+        "ru": "Египетский фунт (EGP)",
+        "en": "Egyptian Pound (EGP)"
+      }
     },
     {
       "id": 3,
       "image": "/slider_3.jpg",
-      "title": { "uz": "Kyoto, Yaponiya", "ru": "Киото, Япония", "en": "Kyoto, Japan" },
+      "title": {
+        "uz": "Kyoto, Yaponiya",
+        "ru": "Киото, Япония",
+        "en": "Kyoto, Japan"
+      },
       "desc": {
         "uz": "Samuraylar tarixi, go'zal ibodatxonalar va Sakura (gilos) gullash mavsumi.",
         "ru": "История самураев, прекрасные храмы и сезон цветения сакуры.",
         "en": "Samurai history, beautiful temples, and the Sakura (cherry blossom) season."
       },
-      "population": { "uz": "122 million", "ru": "122 млн", "en": "122 million" },
-      "area": { "uz": "377,975 km²", "ru": "377,975 км²", "en": "377,975 km²" },
-      "currency": { "uz": "Iena (JPY)", "ru": "Японская иена (JPY)", "en": "Japanese Yen (JPY)" }
+      "population": {
+        "uz": "122 million",
+        "ru": "122 млн",
+        "en": "122 million"
+      },
+      "area": {
+        "uz": "377,975 km²",
+        "ru": "377,975 км²",
+        "en": "377,975 km²"
+      },
+      "currency": {
+        "uz": "Iena (JPY)",
+        "ru": "Японская иена (JPY)",
+        "en": "Japanese Yen (JPY)"
+      }
     },
     {
       "id": 4,
       "image": "/slider_4.jpg",
-      "title": { "uz": "Petra, Iordaniya", "ru": "Петра, Иордания", "en": "Petra, Jordan" },
+      "title": {
+        "uz": "Petra, Iordaniya",
+        "ru": "Петра, Иордания",
+        "en": "Petra, Jordan"
+      },
       "desc": {
         "uz": "Qoyalar ichiga o'yib ishlangan qadimiy pushti shahar.",
         "ru": "Древний розовый город, высеченный прямо в скалах.",
         "en": "The ancient rose-red city carved directly into the rocks."
       },
-      "population": { "uz": "11.5 million", "ru": "11.5 млн", "en": "11.5 million" },
-      "area": { "uz": "89,342 km²", "ru": "89,342 км²", "en": "89,342 km²" },
-      "currency": { "uz": "Iordaniya dinori (JOD)", "ru": "Иорданский динар (JOD)", "en": "Jordanian Dinar (JOD)" }
+      "population": {
+        "uz": "11.5 million",
+        "ru": "11.5 млн",
+        "en": "11.5 million"
+      },
+      "area": {
+        "uz": "89,342 km²",
+        "ru": "89,342 км²",
+        "en": "89,342 km²"
+      },
+      "currency": {
+        "uz": "Iordaniya dinori (JOD)",
+        "ru": "Иорданский динар (JOD)",
+        "en": "Jordanian Dinar (JOD)"
+      }
     },
     {
       "id": 5,
       "image": "/slider_5.jpg",
-      "title": { "uz": "Machu Picchu, Peru", "ru": "Мачу-Пикчу, Перу", "en": "Machu Picchu, Peru" },
+      "title": {
+        "uz": "Machu Picchu, Peru",
+        "ru": "Мачу-Пикчу, Перу",
+        "en": "Machu Picchu, Peru"
+      },
       "desc": {
         "uz": "Inklar imperiyasining tog'lar cho'qqisidagi sirli shahri.",
         "ru": "Таинственный город империи инков на вершинах гор.",
         "en": "The mysterious city of the Inca Empire high in the mountain peaks."
       },
-      "population": { "uz": "34 million", "ru": "34 млн", "en": "34 million" },
-      "area": { "uz": "1,285,220 km²", "ru": "1,285,220 км²", "en": "1,285,220 km²" },
-      "currency": { "uz": "Peru soli (PEN)", "ru": "Перуанский соль (PEN)", "en": "Peruvian Sol (PEN)" }
+      "population": {
+        "uz": "34 million",
+        "ru": "34 млн",
+        "en": "34 million"
+      },
+      "area": {
+        "uz": "1,285,220 km²",
+        "ru": "1,285,220 км²",
+        "en": "1,285,220 km²"
+      },
+      "currency": {
+        "uz": "Peru soli (PEN)",
+        "ru": "Перуанский соль (PEN)",
+        "en": "Peruvian Sol (PEN)"
+      }
     },
     {
       "id": 6,
       "image": "/slider_6.jpg",
-      "title": { "uz": "Maldiv orollari", "ru": "Мальдивы", "en": "Maldives" },
+      "title": {
+        "uz": "Maldiv orollari",
+        "ru": "Мальдивы",
+        "en": "Maldives"
+      },
       "desc": {
         "uz": "Firuza rang suv, oq qum va suv ustidagi villalar.",
         "ru": "Бирюзовая вода, белый песок и виллы над водой.",
         "en": "Turquoise waters, white sands, and overwater villas."
       },
-      "population": { "uz": "0.5 million", "ru": "0.5 млн", "en": "0.5 million" },
-      "area": { "uz": "300 km²", "ru": "300 км²", "en": "300 km²" },
-      "currency": { "uz": "Maldiv rufiyasi (MVR)", "ru": "Мальдивская руфия (MVR)", "en": "Maldivian Rufiyaa (MVR)" }
+      "population": {
+        "uz": "0.5 million",
+        "ru": "0.5 млн",
+        "en": "0.5 million"
+      },
+      "area": {
+        "uz": "300 km²",
+        "ru": "300 км²",
+        "en": "300 km²"
+      },
+      "currency": {
+        "uz": "Maldiv rufiyasi (MVR)",
+        "ru": "Мальдивская руфия (MVR)",
+        "en": "Maldivian Rufiyaa (MVR)"
+      }
     },
     {
       "id": 7,
       "image": "/slider_7.jpg",
-      "title": { "uz": "Bora-Bora, Fransuz Polineziyasi", "ru": "Бора-Бора, Французская Полинезия", "en": "Bora Bora, French Polynesia" },
+      "title": {
+        "uz": "Bora-Bora, Fransuz Polineziyasi",
+        "ru": "Бора-Бора, Французская Полинезия",
+        "en": "Bora Bora, French Polynesia"
+      },
       "desc": {
         "uz": "Dunyodagi eng chiroyli lagunalar.",
         "ru": " Самые красивые лагуны в мире.",
         "en": "The most beautiful lagoons in the world."
       },
-      "population": { "uz": "0.3 million", "ru": "0.3 млн", "en": "0.3 million" },
-      "area": { "uz": "4,167 km²", "ru": "4,167 км²", "en": "4,167 km²" },
-      "currency": { "uz": "Tinch okeani franki (XPF)", "ru": "Франк КФП (XPF)", "en": "CFP Franc (XPF)" }
+      "population": {
+        "uz": "0.3 million",
+        "ru": "0.3 млн",
+        "en": "0.3 million"
+      },
+      "area": {
+        "uz": "4,167 km²",
+        "ru": "4,167 км²",
+        "en": "4,167 km²"
+      },
+      "currency": {
+        "uz": "Tinch okeani franki (XPF)",
+        "ru": "Франк КФП (XPF)",
+        "en": "CFP Franc (XPF)"
+      }
     },
     {
       "id": 8,
       "image": "/slider_8.jpg",
-      "title": { "uz": "Bali, Indoneziya", "ru": "Бали, Индонезия", "en": "Bali, Indonesia" },
+      "title": {
+        "uz": "Bali, Indoneziya",
+        "ru": "Бали, Индонезия",
+        "en": "Bali, Indonesia"
+      },
       "desc": {
         "uz": "Tropik o'rmonlar, guruch maydonlari va serfing uchun jannat.",
         "ru": "Тропические леса, рисовые поля и рай для серфинга.",
         "en": "Tropical forests, rice paddies, and a surfing paradise."
       },
-      "population": { "uz": "280 million", "ru": "280 млн", "en": "280 million" },
-      "area": { "uz": "1,904,569 km²", "ru": "1,904,569 км²", "en": "1,904,569 km²" },
-      "currency": { "uz": "Indoneziya rupiyasi (IDR)", "ru": "Индонезийская рупия (IDR)", "en": "Indonesian Rupiah (IDR)" }
+      "population": {
+        "uz": "280 million",
+        "ru": "280 млн",
+        "en": "280 million"
+      },
+      "area": {
+        "uz": "1,904,569 km²",
+        "ru": "1,904,569 км²",
+        "en": "1,904,569 km²"
+      },
+      "currency": {
+        "uz": "Indoneziya rupiyasi (IDR)",
+        "ru": "Индонезийская рупия (IDR)",
+        "en": "Indonesian Rupiah (IDR)"
+      }
     },
     {
       "id": 9,
       "image": "/slider_9.jpg",
-      "title": { "uz": "Santorini, Gretsiya", "ru": "Санторини, Греция", "en": "Santorini, Greece" },
+      "title": {
+        "uz": "Santorini, Gretsiya",
+        "ru": "Санторини, Греция",
+        "en": "Santorini, Greece"
+      },
       "desc": {
         "uz": "Oq uylar, ko'k gumbazlar va unutilmas quyosh botishi.",
         "ru": "Белые дома, синие купола и незабываемые закаты.",
         "en": "White houses, blue domes, and unforgettable sunsets."
       },
-      "population": { "uz": "10.4 million", "ru": "10.4 млн", "en": "10.4 million" },
-      "area": { "uz": "131,960 km²", "ru": "131,960 км²", "en": "131,960 km²" },
-      "currency": { "uz": "Yevro (EUR)", "ru": "Евро (EUR)", "en": "Euro (EUR)" }
+      "population": {
+        "uz": "10.4 million",
+        "ru": "10.4 млн",
+        "en": "10.4 million"
+      },
+      "area": {
+        "uz": "131,960 km²",
+        "ru": "131,960 км²",
+        "en": "131,960 km²"
+      },
+      "currency": {
+        "uz": "Yevro (EUR)",
+        "ru": "Евро (EUR)",
+        "en": "Euro (EUR)"
+      }
     },
     {
       "id": 10,
       "image": "/slider_10.jpg",
-      "title": { "uz": "Amalfi qirg'og'i, Italiya", "ru": "Амальфитанское побережье, Италия", "en": "Amalfi Coast, Italy" },
+      "title": {
+        "uz": "Amalfi qirg'og'i, Italiya",
+        "ru": "Амальфитанское побережье, Италия",
+        "en": "Amalfi Coast, Italy"
+      },
       "desc": {
         "uz": "Tik qoyalarda joylashgan rang-barang shaharchalar.",
         "ru": "Разноцветные городки, расположенные на крутых скалах.",
         "en": "Colorful towns nestled on steep cliffs."
       },
-      "population": { "uz": "58.9 million", "ru": "58.9 млн", "en": "58.9 million" },
-      "area": { "uz": "301,340 km²", "ru": "301,340 км²", "en": "301,340 km²" },
-      "currency": { "uz": "Yevro (EUR)", "ru": "Евро (EUR)", "en": "Euro (EUR)" }
+      "population": {
+        "uz": "58.9 million",
+        "ru": "58.9 млн",
+        "en": "58.9 million"
+      },
+      "area": {
+        "uz": "301,340 km²",
+        "ru": "301,340 км²",
+        "en": "301,340 km²"
+      },
+      "currency": {
+        "uz": "Yevro (EUR)",
+        "ru": "Евро (EUR)",
+        "en": "Euro (EUR)"
+      }
     },
     {
       "id": 11,
       "image": "/slider_11.jpg",
-      "title": { "uz": "Dubay, BAA", "ru": "Дубай, ОАЭ", "en": "Dubai, UAE" },
+      "title": {
+        "uz": "Dubay, BAA",
+        "ru": "Дубай, ОАЭ",
+        "en": "Dubai, UAE"
+      },
       "desc": {
         "uz": "Burj Xalifa, ulkan savdo markazlari va sahro safari.",
         "ru": "Бурдж-Халифа, огромные торговые центры и сафари в пустыне.",
         "en": "Burj Khalifa, massive shopping malls, and desert safaris."
       },
-      "population": { "uz": "11 million", "ru": "11 млн", "en": "11 million" },
-      "area": { "uz": "83,600 km²", "ru": "83,600 км²", "en": "83,600 km²" },
-      "currency": { "uz": "BAA dirhami (AED)", "ru": "Дирхам ОАЭ (AED)", "en": "UAE Dirham (AED)" }
+      "population": {
+        "uz": "11 million",
+        "ru": "11 млн",
+        "en": "11 million"
+      },
+      "area": {
+        "uz": "83,600 km²",
+        "ru": "83,600 км²",
+        "en": "83,600 km²"
+      },
+      "currency": {
+        "uz": "BAA dirhami (AED)",
+        "ru": "Дирхам ОАЭ (AED)",
+        "en": "UAE Dirham (AED)"
+      }
     },
     {
       "id": 12,
       "image": "/slider_12.jpg",
-      "title": { "uz": "Nyu-York, AQSh", "ru": "Нью-Йорк, США", "en": "New York City, USA" },
+      "title": {
+        "uz": "Nyu-York, AQSh",
+        "ru": "Нью-Йорк, США",
+        "en": "New York City, USA"
+      },
       "desc": {
         "uz": "Tayms-skver, Markaziy park va \"hech qachon uxlamaydigan\" hayot.",
         "ru": "Таймс-сквер, Центральный парк и жизнь в городе, который никогда не спит.",
         "en": "Times Square, Central Park, and life in the city that never sleeps."
       },
-      "population": { "uz": "345 million", "ru": "345 млн", "en": "345 million" },
-      "area": { "uz": "9,833,517 km²", "ru": "9,833,517 км²", "en": "9,833,517 km²" },
-      "currency": { "uz": "AQSh dollari (USD)", "ru": "Доллар США (USD)", "en": "US Dollar (USD)" }
+      "population": {
+        "uz": "345 million",
+        "ru": "345 млн",
+        "en": "345 million"
+      },
+      "area": {
+        "uz": "9,833,517 km²",
+        "ru": "9,833,517 км²",
+        "en": "9,833,517 km²"
+      },
+      "currency": {
+        "uz": "AQSh dollari (USD)",
+        "ru": "Доллар США (USD)",
+        "en": "US Dollar (USD)"
+      }
     },
     {
       "id": 13,
       "image": "/slider_13.jpg",
-      "title": { "uz": "Parij, Fransiya", "ru": "Париж, Франция", "en": "Paris, France" },
+      "title": {
+        "uz": "Parij, Fransiya",
+        "ru": "Париж, Франция",
+        "en": "Paris, France"
+      },
       "desc": {
         "uz": "Eyfel minorasi, Luvr muzeyi va romantika muhiti.",
         "ru": "Эйфелева башня, Лувр и атмосфера романтики.",
         "en": "Eiffel Tower, Louvre Museum, and a romantic atmosphere."
       },
-      "population": { "uz": "68 million", "ru": "68 млн", "en": "68 million" },
-      "area": { "uz": "643,801 km²", "ru": "643,801 км²", "en": "643,801 km²" },
-      "currency": { "uz": "Yevro (EUR)", "ru": "Евро (EUR)", "en": "Euro (EUR)" }
+      "population": {
+        "uz": "68 million",
+        "ru": "68 млн",
+        "en": "68 million"
+      },
+      "area": {
+        "uz": "643,801 km²",
+        "ru": "643,801 км²",
+        "en": "643,801 km²"
+      },
+      "currency": {
+        "uz": "Yevro (EUR)",
+        "ru": "Евро (EUR)",
+        "en": "Euro (EUR)"
+      }
     },
     {
       "id": 14,
       "image": "/slider_14.jpg",
-      "title": { "uz": "Tokio, Yaponiya", "ru": "Токио, Япония", "en": "Tokyo, Japan" },
+      "title": {
+        "uz": "Tokio, Yaponiya",
+        "ru": "Токио, Япония",
+        "en": "Tokyo, Japan"
+      },
       "desc": {
         "uz": "Yuqori texnologiyalar va neon chiroqlar olami.",
         "ru": "Мир высоких технологий и неоновых огней.",
         "en": "A world of high technology and neon lights."
       },
-      "population": { "uz": "122 million", "ru": "122 млн", "en": "122 million" },
-      "area": { "uz": "377,975 km²", "ru": "377,975 км²", "en": "377,975 km²" },
-      "currency": { "uz": "Iena (JPY)", "ru": "Японская иена (JPY)", "en": "Japanese Yen (JPY)" }
+      "population": {
+        "uz": "122 million",
+        "ru": "122 млн",
+        "en": "122 million"
+      },
+      "area": {
+        "uz": "377,975 km²",
+        "ru": "377,975 км²",
+        "en": "377,975 km²"
+      },
+      "currency": {
+        "uz": "Iena (JPY)",
+        "ru": "Японская иена (JPY)",
+        "en": "Japanese Yen (JPY)"
+      }
     },
     {
       "id": 15,
       "image": "/slider_15.jpg",
-      "title": { "uz": "London, Buyuk Britaniya", "ru": "Лондон, Великобритания", "en": "London, UK" },
+      "title": {
+        "uz": "London, Buyuk Britaniya",
+        "ru": "Лондон, Великобритания",
+        "en": "London, UK"
+      },
       "desc": {
         "uz": "Big Ben, Bukingem saroyi va tarixiy ko'chalar.",
         "ru": "Биг-Бен, Букингемский дворец и исторические улицы.",
         "en": "Big Ben, Buckingham Palace, and historic streets."
       },
-      "population": { "uz": "68 million", "ru": "68 млн", "en": "68 million" },
-      "area": { "uz": "242,495 km²", "ru": "242,495 км²", "en": "242,495 km²" },
-      "currency": { "uz": "Funt sterling (GBP)", "ru": "Фунт стерлингов (GBP)", "en": "British Pound (GBP)" }
+      "population": {
+        "uz": "68 million",
+        "ru": "68 млн",
+        "en": "68 million"
+      },
+      "area": {
+        "uz": "242,495 km²",
+        "ru": "242,495 км²",
+        "en": "242,495 km²"
+      },
+      "currency": {
+        "uz": "Funt sterling (GBP)",
+        "ru": "Фунт стерлингов (GBP)",
+        "en": "British Pound (GBP)"
+      }
     },
     {
       "id": 16,
       "image": "/slider_16.jpg",
-      "title": { "uz": "Islandiya", "ru": "Исландия", "en": "Iceland" },
+      "title": {
+        "uz": "Islandiya",
+        "ru": "Исландия",
+        "en": "Iceland"
+      },
       "desc": {
         "uz": "Shimol yog'dusi, vulqonlar va muzliklar o'lkasi.",
         "ru": "Страна северного сияния, вулканов и ледников.",
         "en": "The land of northern lights, volcanoes, and glaciers."
       },
-      "population": { "uz": "0.4 million", "ru": "0.4 млн", "en": "0.4 million" },
-      "area": { "uz": "103,000 km²", "ru": "103,000 км²", "en": "103,000 km²" },
-      "currency": { "uz": "Islandiya kronasi (ISK)", "ru": "Исландская крона (ISK)", "en": "Icelandic Króna (ISK)" }
+      "population": {
+        "uz": "0.4 million",
+        "ru": "0.4 млн",
+        "en": "0.4 million"
+      },
+      "area": {
+        "uz": "103,000 km²",
+        "ru": "103,000 км²",
+        "en": "103,000 km²"
+      },
+      "currency": {
+        "uz": "Islandiya kronasi (ISK)",
+        "ru": "Исландская крона (ISK)",
+        "en": "Icelandic Króna (ISK)"
+      }
     },
     {
       "id": 17,
       "image": "/slider_17.jpg",
-      "title": { "uz": "Banff milliy bog'i, Kanada", "ru": "Банфф, Канада", "en": "Banff National Park, Canada" },
+      "title": {
+        "uz": "Banff milliy bog'i, Kanada",
+        "ru": "Банфф, Канада",
+        "en": "Banff National Park, Canada"
+      },
       "desc": {
         "uz": "Kristaldek tiniq tog' ko'llari va qarag'ayzorlar.",
         "ru": "Кристально чистые горные озера и сосновые леса.",
         "en": "Crystal clear mountain lakes and pine forests."
       },
-      "population": { "uz": "40 million", "ru": "40 млн", "en": "40 million" },
-      "area": { "uz": "9,984,670 km²", "ru": "9,984,670 км²", "en": "9,984,670 km²" },
-      "currency": { "uz": "Kanada dollari (CAD)", "ru": "Канадский доллар (CAD)", "en": "Canadian Dollar (CAD)" }
+      "population": {
+        "uz": "40 million",
+        "ru": "40 млн",
+        "en": "40 million"
+      },
+      "area": {
+        "uz": "9,984,670 km²",
+        "ru": "9,984,670 км²",
+        "en": "9,984,670 km²"
+      },
+      "currency": {
+        "uz": "Kanada dollari (CAD)",
+        "ru": "Канадский доллар (CAD)",
+        "en": "Canadian Dollar (CAD)"
+      }
     },
     {
       "id": 18,
       "image": "/slider_18.jpg",
-      "title": { "uz": "Kapadokiya, Turkiya", "ru": "Каппадокия, Турция", "en": "Cappadocia, Turkey" },
+      "title": {
+        "uz": "Kapadokiya, Turkiya",
+        "ru": "Каппадокия, Турция",
+        "en": "Cappadocia, Turkey"
+      },
       "desc": {
         "uz": "Havo sharlarida uchish va g'aroyib \"ertaklar vodiysi\".",
         "ru": "Полеты на воздушных шарах и сказочная «Долина фей».",
         "en": "Hot air balloon rides and the magical \"Fairy Chimneys.\""
       },
-      "population": { "uz": "85 million", "ru": "85 млн", "en": "85 million" },
-      "area": { "uz": "783,562 km²", "ru": "783,562 км²", "en": "783,562 km²" },
-      "currency": { "uz": "Turk lirasi (TRY)", "ru": "Турецкая лира (TRY)", "en": "Turkish Lira (TRY)" }
+      "population": {
+        "uz": "85 million",
+        "ru": "85 млн",
+        "en": "85 million"
+      },
+      "area": {
+        "uz": "783,562 km²",
+        "ru": "783,562 км²",
+        "en": "783,562 km²"
+      },
+      "currency": {
+        "uz": "Turk lirasi (TRY)",
+        "ru": "Турецкая лира (TRY)",
+        "en": "Turkish Lira (TRY)"
+      }
     },
     {
       "id": 19,
       "image": "/slider_19.jpg",
-      "title": { "uz": "Seregenti, Tanzaniya", "ru": "Серенгети, Танзания", "en": "Serengeti, Tanzania" },
+      "title": {
+        "uz": "Seregenti, Tanzaniya",
+        "ru": "Серенгети, Танзания",
+        "en": "Serengeti, Tanzania"
+      },
       "desc": {
         "uz": "Yovvoyi tabiat, sherlar va mashhur Afrika safari.",
         "ru": "Дикая природа, львы и знаменитое африканское сафари.",
         "en": "Wildlife, lions, and the famous African safari."
       },
-      "population": { "uz": "68 million", "ru": "68 млн", "en": "68 million" },
-      "area": { "uz": "947,300 km²", "ru": "947,300 км²", "en": "947,300 km²" },
-      "currency": { "uz": "Tanzaniya shillingi (TZS)", "ru": "Танзанийский шиллинг (TZS)", "en": "Tanzanian Shilling (TZS)" }
+      "population": {
+        "uz": "68 million",
+        "ru": "68 млн",
+        "en": "68 million"
+      },
+      "area": {
+        "uz": "947,300 km²",
+        "ru": "947,300 км²",
+        "en": "947,300 km²"
+      },
+      "currency": {
+        "uz": "Tanzaniya shillingi (TZS)",
+        "ru": "Танзанийский шиллинг (TZS)",
+        "en": "Tanzanian Shilling (TZS)"
+      }
     },
     {
       "id": 20,
       "image": "/slider_20.jpg",
-      "title": { "uz": "Shveytsariya Alplari", "ru": "Швейцарские Альпы", "en": "Swiss Alps" },
+      "title": {
+        "uz": "Shveytsariya Alplari",
+        "ru": "Швейцарские Альпы",
+        "en": "Swiss Alps"
+      },
       "desc": {
         "uz": "Chang'i sporti va dunyodagi eng toza havoga ega tog'lar.",
         "ru": "Лыжный спорт и горы с самым чистым воздухом в мире.",
         "en": "Skiing and mountains with the cleanest air in the world."
       },
-      "population": { "uz": "9 million", "ru": "9 млн", "en": "9 million" },
-      "area": { "uz": "41,290 km²", "ru": "41,290 км²", "en": "41,290 km²" },
-      "currency": { "uz": "Shveytsariya franki (CHF)", "ru": "Швейцарский франк (CHF)", "en": "Swiss Franc (CHF)" }
+      "population": {
+        "uz": "9 million",
+        "ru": "9 млн",
+        "en": "9 million"
+      },
+      "area": {
+        "uz": "41,290 km²",
+        "ru": "41,290 км²",
+        "en": "41,290 km²"
+      },
+      "currency": {
+        "uz": "Shveytsariya franki (CHF)",
+        "ru": "Швейцарский франк (CHF)",
+        "en": "Swiss Franc (CHF)"
+      }
     }
   ]
 }

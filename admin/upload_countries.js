@@ -11,7 +11,6 @@ if (!admin.apps.length) {
 
 const db = admin.firestore();
 
-// Path: src/lib/data/countries_db.json
 const dataPath = path.join(__dirname, "data/countries_db.json");
 const countriesData = JSON.parse(fs.readFileSync(dataPath, "utf8"));
 
@@ -21,9 +20,8 @@ async function uploadCountries() {
   const collectionRef = db.collection("countries");
 
   countries.forEach((country) => {
-    // Har bir davlat uchun id ni hujjat nomi sifatida ishlatamiz
     const docRef = collectionRef.doc(country.id.toString());
-    
+
     batch.set(docRef, {
       ...country,
       updatedAt: admin.firestore.FieldValue.serverTimestamp()

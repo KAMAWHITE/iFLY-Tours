@@ -7,8 +7,7 @@ const nextConfig = {
     typescript: {
         ignoreBuildErrors: true,
     },
-    // Agar sahifalar yuklanishida 404 muammosi bo'lsa, buni yoqib ko'r:
-    trailingSlash: false, 
+    trailingSlash: false,
 };
 
 export default nextConfig;

@@ -19,8 +19,7 @@ async function cleanAndUpload() {
   const collectionRef = db.collection("flights");
 
   console.log("🚀 Boss, bazani tozalashni boshladik...");
-  
-  // 1. Tozalash (Delete all)
+
   const snapshot = await collectionRef.get();
   const deleteBatch = db.batch();
   snapshot.docs.forEach((doc) => {
@@ -29,7 +28,6 @@ async function cleanAndUpload() {
   await deleteBatch.commit();
   console.log("🗑️ Barcha eski reyslar o'chirildi.");
 
-  // 2. Qayta yuklash (Upload fresh)
   const uploadBatch = db.batch();
   flights.forEach((flight) => {
     const docRef = collectionRef.doc(flight.id.toString());

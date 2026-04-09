@@ -18,7 +18,6 @@ const translations = {
     en: HotelsEn,
 };
 
-// Shaharlar ID-si JSON'dagi selectors bilan bir xil bo'lishi kerak
 const DESTINATIONS = [
     { id: "sel_1", en: "Rome" }, { id: "sel_2", en: "Giza" }, { id: "sel_3", en: "Kyoto" },
     { id: "sel_4", en: "Petra" }, { id: "sel_5", en: "Machu Picchu" }, { id: "sel_6", en: "Maldives" },
@@ -31,7 +30,7 @@ const DESTINATIONS = [
 
 export default function Hotels() {
     const { darkMode, til } = useApp();
-    const t = translations[til] || translations.en; // Hozirgi til obyekti
+    const t = translations[til] || translations.en;
 
     const router = useRouter();
     const [hotels, setHotels] = useState([]);
@@ -127,7 +126,6 @@ export default function Hotels() {
     return (
         <div className={`min-h-screen w-full pb-20 ${darkMode ? "bg-slate-950 text-white" : "bg-gray-50 text-gray-900"}`}>
 
-            {/* Header Section */}
             <div className={`w-full pt-24 pb-20 px-4 relative overflow-hidden ${darkMode ? "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" : "bg-gradient-to-br from-orange-500 via-rose-500 to-pink-500"}`}>
                 <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white/5 blur-3xl translate-x-1/2 -translate-y-1/4 pointer-events-none" />
                 <div className="max-w-6xl mx-auto text-center relative z-10">
@@ -159,14 +157,13 @@ export default function Hotels() {
                 </div>
             </div>
 
-            {/* Grid Section */}
             <div className="max-w-7xl mx-auto px-4 mt-12">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                {filteredHotels.map((hotel) => (
+                    {filteredHotels.map((hotel) => (
                         <div
                             key={hotel.firebaseId}
                             onClick={() => setSelectedHotel(hotel)}
-                            className={`group rounded-3xl overflow-hidden border-2 transition-all duration-500 cursor-pointer hover:-translate-y-1 ${darkMode ? "bg-slate-900 border-slate-800 hover:border-orange-500/50" : "bg-white border-gray-100 shadow-sm hover:shadow-xl hover:border-orange-300"}`}
+                            className={`group rounded-3xl overflow-hidden border-2 transition-all duration-500 cursor-pointer hover:-translate-y-1 ${darkMode ? "bg-slate-900 border-slate-800 hover:border-orange-500/50" : "bg-gray-200 border-gray-300 shadow-sm hover:shadow-xl hover:border-orange-400"}`}
                         >
                             <div className="relative h-56 overflow-hidden">
                                 <img src={hotel.image} alt={hotel.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -185,13 +182,11 @@ export default function Hotels() {
                 </div>
             </div>
 
-            {/* ── HOTEL DETAILS MODAL ── */}
             {selectedHotel && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setSelectedHotel(null)} />
                     <div className={`relative w-full max-w-3xl max-h-[95vh] overflow-y-auto rounded-3xl shadow-2xl ${darkMode ? "bg-slate-900 text-white" : "bg-white text-gray-900"}`}>
 
-                        {/* Modal hero image */}
                         <div className="relative h-60 w-full overflow-hidden rounded-t-3xl">
                             <img src={selectedHotel.image} className="w-full h-full object-cover" alt={selectedHotel.name} />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
@@ -212,9 +207,7 @@ export default function Hotels() {
                             </div>
                         </div>
 
-                        {/* Modal body */}
                         <div className="p-6">
-                            {/* Date pickers */}
                             <div className="grid grid-cols-2 gap-3 mb-5">
                                 <div>
                                     <label className={`text-[10px] font-bold uppercase tracking-widest mb-2 block ${darkMode ? "text-slate-500" : "text-gray-400"}`}>{t.modal.from}</label>
@@ -244,7 +237,6 @@ export default function Hotels() {
                                 </div>
                             </div>
 
-                            {/* Price summary */}
                             <div className={`flex items-center justify-between p-4 rounded-2xl mb-5 border-l-4 border-orange-500 ${darkMode ? "bg-slate-800" : "bg-orange-50"}`}>
                                 <div>
                                     <p className={`text-xs font-bold mb-0.5 ${darkMode ? "text-slate-400" : "text-gray-500"}`}>{t.modal.duration}: {calculateNights()} {t.modal.duration_time}</p>
@@ -256,7 +248,6 @@ export default function Hotels() {
                                 </p>
                             </div>
 
-                            {/* Book button */}
                             <button
                                 disabled={bookingLoading}
                                 onClick={() => handleBookHotel(selectedHotel)}

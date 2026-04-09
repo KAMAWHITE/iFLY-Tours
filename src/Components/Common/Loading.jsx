@@ -21,10 +21,8 @@ const Loading = ({ fullScreen = true, size = 200, text = "" }) => {
             let point = {}, vx2, vy2;
             point.x = Math.random() * boundaryX;
             point.y = Math.random() * boundaryY;
-            // random vx 
             point.vx = (Math.floor(Math.random() * 2) * 2 - 1) * Math.random();
             vx2 = Math.pow(point.vx, 2);
-            // vy^2 = velocity^2 - vx^2
             vy2 = Math.max(0, velocity2 - vx2);
             point.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
             return point;
@@ -35,13 +33,11 @@ const Loading = ({ fullScreen = true, size = 200, text = "" }) => {
             if (axis === "x") {
                 point.vx = dir * Math.random();
                 vx2 = Math.pow(point.vx, 2);
-                // vy^2 = velocity^2 - vx^2
                 vy2 = Math.max(0, velocity2 - vx2);
                 point.vy = Math.sqrt(vy2) * (Math.random() * 2 - 1);
             } else {
                 point.vy = dir * Math.random();
                 vy2 = Math.pow(point.vy, 2);
-                // vy^2 = velocity^2 - vx^2
                 vx2 = Math.max(0, velocity2 - vy2);
                 point.vx = Math.sqrt(vx2) * (Math.random() * 2 - 1);
             }
@@ -50,7 +46,7 @@ const Loading = ({ fullScreen = true, size = 200, text = "" }) => {
         const drawCircle = (x, y) => {
             context.beginPath();
             context.arc(x, y, radius, 0, 2 * Math.PI, false);
-            context.fillStyle = "#97badc"; // User's color
+            context.fillStyle = "#97badc";
             context.fill();
         };
 
@@ -58,17 +54,15 @@ const Loading = ({ fullScreen = true, size = 200, text = "" }) => {
             context.beginPath();
             context.moveTo(x1, y1);
             context.lineTo(x2, y2);
-            context.strokeStyle = "#8ab2d8"; // User's color
+            context.strokeStyle = "#8ab2d8";
             context.lineWidth = 1;
             context.stroke();
         };
 
-        // Initialize points
         for (let i = 0; i < numberOfPoints; i++) {
             points.push(createPoint());
         }
 
-        // Create buddies
         for (let i = 0; i < points.length; i++) {
             points[i].buddy = i === 0 ? points[points.length - 1] : points[i - 1];
         }
@@ -82,7 +76,6 @@ const Loading = ({ fullScreen = true, size = 200, text = "" }) => {
                 drawCircle(point.x, point.y);
                 drawLine(point.x, point.y, point.buddy.x, point.buddy.y);
 
-                // check for edge
                 if (point.x < radius) {
                     resetVelocity(point, "x", 1);
                 } else if (point.x > boundaryX - radius) {

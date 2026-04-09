@@ -16,7 +16,6 @@ import FlightsEn from "../../../locales/en/Flights.json";
 
 const translations = { uz: FlightsUz, ru: FlightsRu, en: FlightsEn };
 
-// ─── Yordamchi ────────────────────────────────────────────────────────────────
 const norm = (val) => {
     if (!val) return "";
     const res = (typeof val === "object") ? (val.uz || "") : val;
@@ -40,7 +39,6 @@ function buildDoc(userId, flight, seat, extra = {}) {
     };
 }
 
-// ─── O'rindiq modali ─────────────────────────────────────────────────────────
 function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) {
     const [sel, setSel] = useState(null);
     useEffect(() => { if (isOpen) setSel(null); }, [isOpen]);
@@ -51,7 +49,7 @@ function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) 
             <div className={`w-full max-w-xl rounded-[40px] shadow-2xl overflow-hidden
                 ${darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"}`}>
 
-                <div className="flex justify-between items-start p-8 border-b border-gray-100 dark:border-gray-700">
+                <div className="flex justify-between items-start p-4 sm:p-8 border-b border-gray-100 dark:border-gray-700">
                     <div className="min-w-0 flex-1 pr-4">
                         <h3 className="text-2xl font-black truncate">{flight.company}</h3>
                         <p className="text-sm text-orange-500 font-bold truncate">
@@ -64,13 +62,13 @@ function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) 
                     </button>
                 </div>
 
-                <div className="p-8 flex flex-col items-center bg-slate-50 dark:bg-gray-900/40">
-                    <div className="w-40 h-8 bg-gray-300 dark:bg-gray-700 rounded-t-full mb-8 flex items-center justify-center">
+                <div className="p-4 sm:p-8 flex flex-col items-center bg-slate-50 dark:bg-gray-900/40 overflow-x-auto scrollbar-hide">
+                    <div className="w-40 h-8 bg-gray-300 dark:bg-gray-700 rounded-t-full mb-8 flex items-center justify-center flex-shrink-0">
                         <span className="text-[10px] uppercase font-bold opacity-40 tracking-widest">{t.front}</span>
                     </div>
                     <div className="grid gap-3">
                         {[1, 2, 3, 4, 5, 6].map((row) => (
-                            <div key={row} className="flex gap-2 items-center">
+                            <div key={row} className="flex gap-1.5 sm:gap-2 items-center justify-center">
                                 <span className="w-5 text-[10px] font-black text-gray-400">{row}</span>
                                 {["A", "B", "C", "D", "E", "F"].map((col, idx) => {
                                     const id = `${row}${col}`;
@@ -78,7 +76,7 @@ function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) 
                                     return (
                                         <React.Fragment key={col}>
                                             <button disabled={taken} onClick={() => setSel(id)}
-                                                className={`w-10 h-11 rounded-xl text-[10px] font-black transition-all
+                                                className={`w-[34px] sm:w-10 h-10 sm:h-11 rounded-xl text-[10px] font-black transition-all
                                                     flex items-center justify-center border-2
                                                     ${taken
                                                         ? "bg-gray-300 border-gray-400 text-gray-500 cursor-not-allowed"
@@ -87,22 +85,23 @@ function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) 
                                                             : "bg-white dark:bg-gray-700 border-green-500 text-green-600 hover:bg-green-500 hover:text-white"
                                                     }`}
                                             >{col}</button>
-                                            {idx === 2 && <div className="w-6" />}
+                                            {idx === 2 && <div className="w-4 sm:w-6" />}
                                         </React.Fragment>
                                     );
                                 })}
+                                <span className="w-5" />
                             </div>
                         ))}
                     </div>
                 </div>
 
-                <div className="p-8 flex justify-between items-center">
+                <div className="p-4 sm:p-8 flex justify-between items-center">
                     <div>
                         <p className="text-gray-400 text-[10px] font-bold uppercase">{t.selected}</p>
-                        <p className="text-3xl font-black text-orange-500">{sel || "--"}</p>
+                        <p className="text-2xl sm:text-3xl font-black text-orange-500">{sel || "--"}</p>
                     </div>
                     <button disabled={!sel} onClick={() => onConfirm(flight, sel)}
-                        className={`px-10 py-4 rounded-2xl text-sm font-black transition-all
+                        className={`px-6 sm:px-10 py-3 sm:py-4 rounded-2xl text-xs sm:text-sm font-black transition-all
                             ${sel ? "bg-orange-500 hover:bg-orange-600 text-white shadow-lg active:scale-95"
                                 : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
                         {t.confirmSeat}
@@ -113,22 +112,19 @@ function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) 
     );
 }
 
-// ─── To'lov modali (Simulyatsiya) ──────────────────────────────────────────────
 function PaymentModal({ isOpen, t, countdown }) {
     if (!isOpen) return null;
 
     return (
         <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/80 backdrop-blur-xl p-4">
-            <div className="w-full max-w-lg bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-[40px] p-10 text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,165,0,0.2)] border border-white/10">
-                {/* Background Decorations */}
+            <div className="w-full max-w-lg bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-[40px] p-6 sm:p-10 text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,165,0,0.2)] border border-white/10">
                 <div className="absolute -top-24 -left-24 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl animate-pulse" />
                 <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl animate-pulse" />
 
-                {/* Content */}
                 <div className="relative z-10 space-y-6">
                     <div className="flex justify-center">
-                        <div className="w-24 h-24 bg-orange-500 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(249,115,22,0.5)] animate-bounce">
-                            <span className="text-4xl text-white">💳</span>
+                        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-orange-500 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(249,115,22,0.5)] animate-bounce">
+                            <span className="text-3xl sm:text-4xl text-white">💳</span>
                         </div>
                     </div>
 
@@ -140,13 +136,13 @@ function PaymentModal({ isOpen, t, countdown }) {
                     </div>
 
                     <div className="flex justify-center items-center gap-4">
-                        <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-3xl font-black text-orange-500">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl sm:text-3xl font-black text-orange-500">
                             {countdown}
                         </div>
                     </div>
 
                     <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
-                        <div 
+                        <div
                             className="bg-gradient-to-r from-orange-500 to-rose-500 h-full transition-all duration-1000 ease-linear"
                             style={{ width: `${(countdown / 5) * 100}%` }}
                         />
@@ -161,56 +157,59 @@ function PaymentModal({ isOpen, t, countdown }) {
     );
 }
 
-// ─── Reys kartasi ─────────────────────────────────────────────────────────────
 function FlightCard({ flight, til, darkMode, t, isSelected, onSelect }) {
     return (
         <div onClick={onSelect}
             className={`p-5 sm:p-6 rounded-2xl border-2 transition-all cursor-pointer group relative
                 ${isSelected
-                    ? darkMode ? "bg-slate-800 border-orange-500" : "bg-orange-50 border-orange-400 shadow-lg"
+                    ? darkMode ? "bg-slate-800 border-orange-500 shadow-lg" : "bg-orange-50 border-orange-400 shadow-lg"
                     : darkMode ? "bg-slate-900 border-slate-800 hover:border-orange-500/70 hover:bg-slate-800"
-                        : "bg-white border-gray-100 shadow-sm hover:shadow-xl hover:border-orange-300"}`}>
+                        : "bg-gray-200 border-gray-300 shadow-sm hover:shadow-xl hover:border-orange-400"}`}>
             {isSelected && (
                 <div className="absolute top-4 right-4">
                     <FaCheckCircle className="text-orange-500" size={20} />
                 </div>
             )}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div className="flex items-center justify-center md:justify-start gap-3 w-full md:w-1/4 min-w-0">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+                <div className="flex items-center justify-center lg:justify-start gap-3 w-full lg:w-1/4 min-w-0">
                     <img src={flight.logo} alt=""
-                        className="w-12 h-12 object-contain flex-shrink-0 group-hover:scale-110 transition-transform" />
-                    <h4 className="font-black text-lg truncate">{flight.company}</h4>
+                        className="w-10 h-10 lg:w-12 lg:h-12 object-contain flex-shrink-0 group-hover:scale-110 transition-transform" />
+                    <h4 className="font-black text-sm lg:text-base xl:text-lg truncate">{flight.company}</h4>
                 </div>
-                <div className="flex-1 flex flex-col md:flex-row items-center justify-center gap-4 w-full px-2 min-w-0">
+                <div className="flex-1 flex flex-col lg:flex-row items-center justify-center gap-2 xl:gap-4 w-full px-2 min-w-0">
                     <div className="text-center flex-1 min-w-0">
-                        <p className="text-xl md:text-2xl font-black truncate">{flight.from?.[til]}</p>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase">{t.from}</p>
+                        <p className="text-base lg:text-xl xl:text-2xl font-black truncate">{flight.from?.[til]}</p>
+                        <p className="text-[9px] sm:text-[10px] text-gray-400 font-bold uppercase">{t.from}</p>
                     </div>
-                    <div className="w-12 md:w-20 flex-shrink-0">
-                        <div className="w-full h-[2px] bg-gray-200 relative">
-                            <span className={`absolute -top-2 left-1/2 -translate-x-1/2 px-1 text-sm
-                                ${darkMode ? "bg-slate-900 group-hover:bg-slate-800" : "bg-white"}`}>✈️</span>
+                    <div className="w-10 sm:w-12 lg:w-16 xl:w-20 flex-shrink-0">
+                        <div className="w-full h-[1px] lg:h-[2px] bg-gray-200 relative">
+                            <span className={`absolute -top-2 left-1/2 -translate-x-1/2 px-1 text-xs lg:text-sm transition-colors
+                                ${darkMode
+                                    ? "bg-slate-900 group-hover:bg-slate-800"
+                                    : isSelected
+                                        ? "bg-orange-50"
+                                        : "bg-gray-200 group-hover:bg-gray-200"
+                                }`}>✈️</span>
                         </div>
                     </div>
                     <div className="text-center flex-1 min-w-0">
-                        <p className="text-xl md:text-2xl font-black truncate">{flight.to?.[til]}</p>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase">{t.to}</p>
+                        <p className="text-base lg:text-xl xl:text-2xl font-black truncate">{flight.to?.[til]}</p>
+                        <p className="text-[9px] sm:text-[10px] text-gray-400 font-bold uppercase">{t.to}</p>
                     </div>
                 </div>
-                <div className="w-full md:w-1/4 text-center md:text-right border-t md:border-t-0 pt-4 md:pt-0
+                <div className="w-full lg:w-1/4 text-center lg:text-right border-t lg:border-t-0 pt-4 lg:pt-0
                     border-gray-100 dark:border-gray-800 flex-shrink-0">
-                    <p className="text-xl md:text-2xl font-black text-orange-500">
+                    <p className="text-xl sm:text-2xl font-black text-orange-500">
                         {Number(flight.price).toLocaleString()}
-                        <span className="text-xs ml-1">{flight.currency ?? "UZS"}</span>
+                        <span className="text-[10px] sm:text-xs ml-1 font-bold">{flight.currency ?? "UZS"}</span>
                     </p>
-                    <p className="text-[10px] font-bold text-gray-400 mt-1">{flight.date} • {flight.time}</p>
+                    <p className="text-[9px] sm:text-[10px] font-bold text-gray-400 mt-1">{flight.date} • {flight.time}</p>
                 </div>
             </div>
         </div>
     );
 }
 
-// ─── Reys ro'yxati ───────────────────────────────────────────────────────────
 function FlightList({ flights, loading, darkMode, til, t, selectedId, onSelect }) {
     if (loading) return (
         <div className="py-16">
@@ -235,9 +234,6 @@ function FlightList({ flights, loading, darkMode, til, t, selectedId, onSelect }
     );
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// ASOSIY SAHIFA
-// ─────────────────────────────────────────────────────────────────────────────
 export default function FlightsPage() {
     const { til, darkMode } = useApp();
     const t = translations[til] || FlightsUz;
@@ -260,7 +256,6 @@ export default function FlightsPage() {
     const [showPaymentModal, setShowPaymentModal] = useState(false);
     const [countdown, setCountdown] = useState(5);
 
-    // ── Payment Modal Timer & Redirect ──
     useEffect(() => {
         let timer;
         if (showPaymentModal && countdown > 0) {
@@ -290,58 +285,45 @@ export default function FlightsPage() {
             .map((k) => ({ key: k, name: t.selectors[k] }))
         , [t]);
 
-    // ── Qidiruv parametrlari ──────────────────────────────────────────────────
     const q = appliedQuery ?? { isSwapped, destKey, date, returnDate, tripType };
 
-    // Firestore da saqlangan shahar nomi (uz) — selector kaliti orqali
-    const BASE_UZ   = FlightsUz.selectors.sel_0;           // masalan "Toshkent"
+    const BASE_UZ = FlightsUz.selectors.sel_0;
     const TARGET_UZ = q.destKey
-        ? FlightsUz.selectors[q.destKey]                   // masalan "Rim"
+        ? FlightsUz.selectors[q.destKey]
         : "";
 
-    // ── BORISH reylsari ───────────────────────────────────────────────────────
-    // isSwapped=false => Toshkent → Rim
-    // isSwapped=true  => Rim      → Toshkent
     const departureFlights = useMemo(() => {
         const fromUz = q.isSwapped ? TARGET_UZ : BASE_UZ;
-        const toUz   = q.isSwapped ? BASE_UZ   : TARGET_UZ;
+        const toUz = q.isSwapped ? BASE_UZ : TARGET_UZ;
 
         return allFlights
             .filter((f) => {
-                // Boshlang'ich holatda (filtrsiz) barcha 120 ta reysni ko'rsatish
                 if (!appliedQuery && !q.destKey && !q.date) return true;
 
                 const mFrom = !fromUz || norm(f.from) === norm(fromUz);
-                const mTo   = !toUz   || norm(f.to)   === norm(toUz);
+                const mTo = !toUz || norm(f.to) === norm(toUz);
                 const mDate = !q.date || f.date === q.date;
                 return mFrom && mTo && mDate;
             })
             .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
     }, [allFlights, q.isSwapped, q.date, q.destKey, appliedQuery, BASE_UZ, TARGET_UZ]);
 
-    // ── QAYTISH reylsari ──────────────────────────────────────────────────────
-    //   ESLATMA: Round-trip da isSwapped har doim false, shuning uchun
-    //   qaytish yo'nalishi doim TARGET→BASE bo'ladi.
-    //
     const returnFlights = useMemo(() => {
         if (tripType !== "roundTrip") return [];
 
-        // Qaytish: TARGET → BASE  (masalan: Rim → Toshkent)
-        // Agar shahar tanlanmagan bo'lsa (TARGET_UZ bo'sh), har qanday shahardan keluvchi reyslarni ko'rsatamiz
         const retFromUz = TARGET_UZ;
-        const retToUz   = BASE_UZ;
+        const retToUz = BASE_UZ;
 
         return allFlights
             .filter((f) => {
                 const mFrom = !retFromUz || norm(f.from) === norm(retFromUz);
-                const mTo   = !retToUz   || norm(f.to)   === norm(retToUz);
+                const mTo = !retToUz || norm(f.to) === norm(retToUz);
                 const mDate = !q.returnDate || f.date === q.returnDate;
                 return mFrom && mTo && mDate;
             })
             .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
     }, [allFlights, tripType, TARGET_UZ, BASE_UZ, q.returnDate]);
 
-    // ── Handlerlar ────────────────────────────────────────────────────────────
     const handleTripType = useCallback((type) => {
         setTripTypeState(type);
         if (type === "roundTrip") setIsSwapped(false);
@@ -403,8 +385,7 @@ export default function FlightsPage() {
                 ]);
             }
             toast.success(t.complate);
-            
-            // Trigger Payment Simulation (Timer handled by useEffect)
+
             setShowPaymentModal(true);
 
         } catch (e) { console.error(e); toast.error(t.error); }
@@ -439,13 +420,9 @@ export default function FlightsPage() {
         ? new Date(new Date(date).getTime() + 86400000).toISOString().split("T")[0]
         : "";
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // RENDER
-    // ─────────────────────────────────────────────────────────────────────────
     return (
-        <div className={`min-h-screen w-full ${darkMode ? "bg-slate-950 text-white" : "bg-gray-50 text-gray-900"}`}>
+        <div className={`min-h-screen w-full relative overflow-x-hidden ${darkMode ? "bg-slate-950 text-white" : "bg-gray-50 text-gray-900"}`}>
 
-            {/* ── Qidiruv paneli ── */}
             <div className={`w-full pt-24 pb-16 px-4 relative overflow-hidden
                 ${darkMode
                     ? "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
@@ -460,9 +437,8 @@ export default function FlightsPage() {
                         <FaPlaneDeparture /> {t.search}
                     </h1>
 
-                    <div className="bg-white p-6 rounded-[30px] shadow-2xl space-y-5 text-gray-800">
+                    <div className="bg-white p-4 sm:p-6 rounded-[30px] shadow-2xl space-y-5 text-gray-800">
 
-                        {/* Trip type */}
                         <div className="flex p-1 bg-gray-100 rounded-2xl w-fit gap-1">
                             {["oneWay", "roundTrip"].map((type) => (
                                 <button key={type} onClick={() => handleTripType(type)}
@@ -475,10 +451,9 @@ export default function FlightsPage() {
                             ))}
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-12 gap-3 items-end">
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 xl:gap-4 items-end">
 
-                            {/* FROM */}
-                            <div className="md:col-span-3 min-w-0">
+                            <div className="lg:col-span-3 min-w-0">
                                 <label className="text-[10px] font-bold text-gray-400 uppercase mb-1 block">{t.from}</label>
                                 {!isSwapped ? (
                                     <input readOnly value={t.selectors.sel_0}
@@ -493,8 +468,7 @@ export default function FlightsPage() {
                                 )}
                             </div>
 
-                            {/* Swap — faqat oneWay */}
-                            <div className="md:col-span-1 flex justify-center pb-2">
+                            <div className="lg:col-span-1 flex justify-center pb-2">
                                 <button
                                     onClick={() => tripType === "oneWay" && setIsSwapped((v) => !v)}
                                     disabled={tripType === "roundTrip"}
@@ -506,8 +480,7 @@ export default function FlightsPage() {
                                 </button>
                             </div>
 
-                            {/* TO */}
-                            <div className="md:col-span-3 min-w-0">
+                            <div className="lg:col-span-3 min-w-0">
                                 <label className="text-[10px] font-bold text-gray-400 uppercase mb-1 block">{t.to}</label>
                                 {isSwapped ? (
                                     <input readOnly value={t.selectors.sel_0}
@@ -522,8 +495,7 @@ export default function FlightsPage() {
                                 )}
                             </div>
 
-                            {/* Sanalar */}
-                            <div className={`md:col-span-5 grid gap-3 ${tripType === "roundTrip" ? "grid-cols-2" : "grid-cols-1"}`}>
+                            <div className={`lg:col-span-5 grid gap-2 xl:gap-3 ${tripType === "roundTrip" ? "grid-cols-2" : "grid-cols-1"}`}>
                                 <div>
                                     <label className="text-[10px] font-bold text-gray-400 uppercase mb-1 block">📅 {t.date}</label>
                                     <input type="date" value={date}
@@ -532,7 +504,7 @@ export default function FlightsPage() {
                                             setDate(e.target.value);
                                             if (returnDate && returnDate <= e.target.value) setReturnDate("");
                                         }}
-                                        className="w-full p-4 bg-gray-100 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-orange-400" />
+                                        className="w-full px-2 xl:px-3.5 py-4 bg-gray-100 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-orange-400 text-xs sm:text-sm lg:text-[13px] xl:text-base pointer-events-auto" />
                                 </div>
                                 {tripType === "roundTrip" && (
                                     <div>
@@ -541,8 +513,8 @@ export default function FlightsPage() {
                                             disabled={!date}
                                             min={returnDateMin}
                                             onChange={(e) => setReturnDate(e.target.value)}
-                                            className="w-full p-4 bg-gray-100 rounded-2xl font-bold outline-none border-2 border-transparent
-                                                focus:border-orange-400 disabled:opacity-50 disabled:cursor-not-allowed" />
+                                            className="w-full px-2 xl:px-3.5 py-4 bg-gray-100 rounded-2xl font-bold outline-none border-2 border-transparent
+                                                focus:border-orange-400 disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm lg:text-[13px] xl:text-base pointer-events-auto" />
                                     </div>
                                 )}
                             </div>
@@ -565,14 +537,12 @@ export default function FlightsPage() {
                 </div>
             </div>
 
-            {/* ── Reyslar ── */}
-            <div className="max-w-5xl mx-auto px-4 py-12 space-y-14">
+            <div className="max-w-6xl mx-auto px-4 py-12 space-y-14">
 
-                {/* ONE-WAY */}
                 {tripType === "oneWay" && (
                     <section>
-                        <div className="flex justify-between items-center mb-6">
-                            <p className="text-xs font-black uppercase tracking-widest text-gray-400">{sectionLabel}</p>
+                        <div className="flex flex-wrap justify-between items-center gap-3 mb-6">
+                            <p className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-gray-400">{sectionLabel}</p>
                             {!loading && (
                                 <span className="bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-xs font-black">
                                     {departureFlights.length} {t.count_of_results}
@@ -585,10 +555,8 @@ export default function FlightsPage() {
                     </section>
                 )}
 
-                {/* ROUND-TRIP: ikki bo'lim bir sahifada */}
                 {tripType === "roundTrip" && (
                     <>
-                        {/* BORISH bo'limi */}
                         <section>
                             <div className="flex justify-between items-center mb-4 flex-wrap gap-3">
                                 <div>
@@ -618,7 +586,6 @@ export default function FlightsPage() {
                                 onSelect={(f) => setModal({ open: true, flight: f, direction: "dep" })} />
                         </section>
 
-                        {/* QAYTISH bo'limi */}
                         <section>
                             <div className="flex justify-between items-center mb-4 flex-wrap gap-3">
                                 <div>
@@ -648,12 +615,11 @@ export default function FlightsPage() {
                                 onSelect={(f) => setModal({ open: true, flight: f, direction: "ret" })} />
                         </section>
 
-                        {/* Sticky booking panel */}
                         {(selectedDep || selectedRet) && (
-                            <div className={`sticky bottom-6 z-50 rounded-2xl p-5 shadow-2xl border
+                            <div className={`sticky bottom-6 z-50 rounded-[28px] p-4 sm:p-5 shadow-2xl border
                                 flex flex-col sm:flex-row items-center justify-between gap-4
                                 ${darkMode ? "bg-slate-900 border-slate-700" : "bg-white border-gray-100"}`}>
-                                <div className="flex gap-6 flex-wrap">
+                                <div className="flex gap-4 sm:gap-6 flex-wrap justify-center sm:justify-start">
                                     {selectedDep && (
                                         <div>
                                             <p className="text-[10px] font-black text-gray-400 uppercase">{t.departureFlight ?? "Borish"}</p>
@@ -697,9 +663,8 @@ export default function FlightsPage() {
                     </>
                 )}
 
-                {/* One-way sticky panel */}
                 {tripType === "oneWay" && selectedDep && (
-                    <div className={`sticky bottom-6 z-50 rounded-2xl p-5 shadow-2xl border
+                    <div className={`sticky bottom-6 z-50 rounded-[28px] p-4 sm:p-5 shadow-2xl border
                         flex items-center justify-between gap-4
                         ${darkMode ? "bg-slate-900 border-slate-700" : "bg-white border-gray-100"}`}>
                         <div>
@@ -719,7 +684,6 @@ export default function FlightsPage() {
                 )}
             </div>
 
-            {/* Modal */}
             <SeatMapModal
                 isOpen={modal.open}
                 flight={modal.flight}
@@ -730,8 +694,7 @@ export default function FlightsPage() {
                 til={til}
             />
 
-            {/* Payment Modal */}
-            <PaymentModal 
+            <PaymentModal
                 isOpen={showPaymentModal}
                 t={t}
                 countdown={countdown}

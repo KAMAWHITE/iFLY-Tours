@@ -12,7 +12,7 @@ const db = admin.firestore();
 async function checkAndWipe() {
   const collectionRef = db.collection("flights");
   const snapshot = await collectionRef.get();
-  
+
   console.log(`📊 Bazada jami hujjatlar soni: ${snapshot.size}`);
 
   const idCounts = {};
@@ -36,23 +36,21 @@ async function checkAndWipe() {
   await batch.commit();
   console.log("🗑️  Hamma ma'lumotlar o'chirildi.");
 
-  // Qayta yuklash
   const fs = require("fs");
   const path = require("path");
   const flightsData = JSON.parse(fs.readFileSync(path.join(__dirname, "data", "flights_db.json"), "utf8"));
   const flights = flightsData.flights;
 
-  // 500 talik batch limitiga amal qilamiz
   for (let i = 0; i < flights.length; i += 400) {
     const currentBatch = db.batch();
     const chunk = flights.slice(i, i + 400);
     chunk.forEach(flight => {
-        const docRef = collectionRef.doc(flight.id.toString());
-        currentBatch.set(docRef, {
-            ...flight,
-            price: Number(flight.price),
-            createdAt: admin.firestore.FieldValue.serverTimestamp()
-        });
+      const docRef = collectionRef.doc(flight.id.toString());
+      currentBatch.set(docRef, {
+        ...flight,
+        price: Number(flight.price),
+        createdAt: admin.firestore.FieldValue.serverTimestamp()
+      });
     });
     await currentBatch.commit();
   }
