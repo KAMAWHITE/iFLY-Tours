@@ -16,7 +16,12 @@ export default function ClientLayout({ children }) {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
+            // Faqat emaili tasdiqlangan foydalanuvchilarni "kirgan" hisoblaymiz
+            if (currentUser && currentUser.emailVerified) {
+                setUser(currentUser);
+            } else {
+                setUser(null);
+            }
             setLoading(false);
         });
         return () => unsubscribe();
@@ -30,8 +35,10 @@ export default function ClientLayout({ children }) {
                     <Loading fullScreen={true} />
                 </div>
             ) : !user ? (
+                // Kirish/Ro'yxatdan o'tish sahifasi — Header va Footer yo'q
                 <Auth />
             ) : (
+                // Kirgan foydalanuvchi uchun to'liq layout
                 <>
                     <Header />
                     <main className="min-h-screen">{children}</main>

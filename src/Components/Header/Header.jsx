@@ -115,7 +115,8 @@ export default function Navbar() {
             : "bg-gradient-to-r from-orange-500 via-rose-500 to-pink-500";
 
     return (
-        <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ${navBg}`}>
+        <>
+            <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ${navBg}`}>
             <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 py-3">
 
                 <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 group">
@@ -256,6 +257,8 @@ export default function Navbar() {
                 </div>
             </div>
 
+            </nav>
+
             {isOpen && (
                 <div
                     className={`sm:hidden fixed inset-0 z-[9999] flex flex-col ${darkMode
@@ -319,6 +322,6 @@ export default function Navbar() {
                     </div>
                 </div>
             )}
-        </nav>
+        </>
     );
 }

@@ -217,8 +217,21 @@ export default function Hotels() {
                                             type="date"
                                             className="bg-transparent outline-none text-xs font-bold w-full"
                                             value={checkIn}
+                                            max={`${new Date().getFullYear()}-12-31`}
                                             min={new Date().toISOString().split("T")[0]}
-                                            onChange={(e) => setCheckIn(e.target.value)}
+                                            onChange={(e) => {
+                                                let val = e.target.value;
+                                                const maxD = `${new Date().getFullYear()}-12-31`;
+                                                const minD = new Date().toISOString().split("T")[0];
+                                                if (val !== "" && val < minD) val = minD;
+                                                if (val > maxD) val = maxD;
+                                                setCheckIn(val);
+                                            }}
+                                            onBlur={(e) => {
+                                                if (e.target.validity.badInput) {
+                                                    setCheckIn(new Date().toISOString().split("T")[0]);
+                                                }
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -230,8 +243,21 @@ export default function Hotels() {
                                             type="date"
                                             className="bg-transparent outline-none text-xs font-bold w-full"
                                             value={checkOut}
+                                            max={`${new Date().getFullYear()}-12-31`}
                                             min={checkIn || new Date().toISOString().split("T")[0]}
-                                            onChange={(e) => setCheckOut(e.target.value)}
+                                            onChange={(e) => {
+                                                let val = e.target.value;
+                                                const maxD = `${new Date().getFullYear()}-12-31`;
+                                                const minD = checkIn || new Date().toISOString().split("T")[0];
+                                                if (val !== "" && val < minD) val = minD;
+                                                if (val > maxD) val = maxD;
+                                                setCheckOut(val);
+                                            }}
+                                            onBlur={(e) => {
+                                                if (e.target.validity.badInput) {
+                                                    setCheckOut(checkIn || new Date().toISOString().split("T")[0]);
+                                                }
+                                            }}
                                         />
                                     </div>
                                 </div>

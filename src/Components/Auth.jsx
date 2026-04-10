@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth, db } from "@/lib/firebase";
 import {
     createUserWithEmailAndPassword,
@@ -9,12 +9,13 @@ import {
     GoogleAuthProvider,
     FacebookAuthProvider,
     signInWithPopup,
-    sendPasswordResetEmail
+    sendPasswordResetEmail,
+    sendEmailVerification,
+    signOut
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { Eye, EyeOff, Plane, ArrowRight, Mail, Lock, User } from "lucide-react";
 import Image from "next/image";
-import toast from "react-hot-toast";
 import Loading from "@/Components/Common/Loading";
 
 const T = {
@@ -123,6 +124,7 @@ export default function AuthPage() {
     const [lang, setLang] = useState("uz");
     const [passChecks, setPassChecks] = useState({ length: false, upper: false, number: false, special: false });
     const [passTyped, setPassTyped] = useState(false);
+    const [formMessage, setFormMessage] = useState(null);
 
     if (typeof window !== "undefined") {
         const saved = localStorage.getItem("language");
@@ -141,8 +143,18 @@ export default function AuthPage() {
         confirmPassword: ""
     });
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user && user.emailVerified) {
+                window.location.replace("/");
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
+        if (formMessage) setFormMessage(null);
         setFormData({ ...formData, [name]: value });
         if (name === "password") {
             setPassChecks(checkPassword(value));
@@ -150,8 +162,9 @@ export default function AuthPage() {
         }
     };
 
-    const switchMode = (newMode) => {
+    const switchMode = (newMode, keepMessage = false) => {
         if (newMode === mode) return;
+        if (!keepMessage && formMessage) setFormMessage(null);
         setAnimating(true);
         setTimeout(() => { setMode(newMode); setAnimating(false); }, 220);
     };
@@ -159,11 +172,11 @@ export default function AuthPage() {
     const secureRedirect = () => window.location.replace("/");
 
     const handleForgotPassword = async () => {
-        if (!formData.email) { toast.error(t.enterEmail); return; }
+        if (!formData.email) { setFormMessage({ type: "error", text: t.enterEmail }); return; }
         try {
             await sendPasswordResetEmail(auth, formData.email.trim());
-            toast.success(t.resetSent);
-        } catch (error) { toast.error(error.message); }
+            setFormMessage({ type: "success", text: t.resetSent });
+        } catch (error) { setFormMessage({ type: "error", text: error.message }); }
     };
 
     const handleGoogleAuth = async () => {
@@ -185,7 +198,9 @@ export default function AuthPage() {
             }, { merge: true });
             secureRedirect();
         } catch (error) {
-            if (error.code !== "auth/cancelled-popup-request") toast.error(lang === "uz" ? "Xatolik yuz berdi" : lang === "ru" ? "Произошла ошибка" : "An error occurred");
+            if (error.code !== "auth/cancelled-popup-request") {
+                setFormMessage({ type: "error", text: lang === "uz" ? "Xatolik yuz berdi yoki juda ko'p urinishlar" : lang === "ru" ? "Произошла ошибка или слишком много попыток" : "An error occurred or too many requests" });
+            }
             setLoading(false);
         }
     };
@@ -229,9 +244,9 @@ export default function AuthPage() {
         } catch (error) {
             console.error(error);
             if (error.code !== "auth/cancelled-popup-request") {
-                toast.error(error.code === "auth/account-exists-with-different-credential"
+                setFormMessage({ type: "error", text: error.code === "auth/account-exists-with-different-credential"
                     ? (lang === "uz" ? "Ushbu email boshqa kirish usuli bilan bog'langan." : lang === "ru" ? "Этот адрес электронной почты связан с другим методом входа." : "This email is linked to a different sign-in method.")
-                    : (lang === "uz" ? "Xatolik yuz berdi" : lang === "ru" ? "Произошла ошибка" : "An error occurred"));
+                    : (lang === "uz" ? "Xatolik yuz berdi" : lang === "ru" ? "Произошла ошибка" : "An error occurred") });
             }
             setLoading(false);
         }
@@ -260,12 +275,34 @@ export default function AuthPage() {
                     uid: res.user.uid,
                     createdAt: new Date().toISOString()
                 });
+                await sendEmailVerification(res.user);
+                await signOut(auth);
+                setFormMessage({ type: "success", text: lang === "uz" ? "Pochtangizga tasdiqlash xati yuborildi. Iltimos emailingizni tasdiqlang!" : lang === "ru" ? "Письмо отправлено. Пожалуйста, подтвердите вашу почту!" : "Verification email sent. Please verify your email!" });
+                switchMode("login", true);
+                setLoading(false);
+                return;
             } else {
-                await signInWithEmailAndPassword(auth, formData.email.trim(), formData.password);
+                const res = await signInWithEmailAndPassword(auth, formData.email.trim(), formData.password);
+                if (!res.user.emailVerified) {
+                    // Emailni qayta yubormasdan, faqat xabar ko'rsatamiz
+                    await signOut(auth);
+                    setFormMessage({ type: "error", text: lang === "uz" ? "Email hali tasdiqlanmagan! Pochtangizni oching va tasdiqlash havolasini bosing." : lang === "ru" ? "Email ещё не подтверждён! Откройте почту и перейдите по ссылке подтверждения." : "Email not verified! Please check your inbox and click the verification link." });
+                    setLoading(false);
+                    return;
+                }
             }
             secureRedirect();
         } catch (error) {
-            toast.error(error.message);
+            const code = error.code;
+            const msg =
+                code === "auth/invalid-credential" || code === "auth/wrong-password" || code === "auth/user-not-found"
+                    ? (lang === "uz" ? "Email yoki parol noto'g'ri!" : lang === "ru" ? "Неверный email или пароль!" : "Incorrect email or password!")
+                    : code === "auth/too-many-requests"
+                        ? (lang === "uz" ? "Juda ko'p urinish! Bir oz kuting." : lang === "ru" ? "Слишком много попыток! Подождите немного." : "Too many attempts! Please wait a moment.")
+                        : code === "auth/network-request-failed"
+                            ? (lang === "uz" ? "Internet aloqasida muammo!" : lang === "ru" ? "Проблема с интернет-соединением!" : "Network connection problem!")
+                            : error.message;
+            setFormMessage({ type: "error", text: msg });
             setLoading(false);
         }
     };
@@ -431,6 +468,17 @@ export default function AuthPage() {
                                     >
                                         {showConfirm ? <EyeOff size={15} /> : <Eye size={15} />}
                                     </button>
+                                </div>
+                            )}
+
+                            {formMessage && (
+                                <div className={`p-4 mb-5 rounded-2xl text-xs font-bold flex items-start gap-2.5 ${
+                                    formMessage.type === "error" 
+                                        ? "bg-rose-50 text-rose-600 border border-rose-100 dark:bg-rose-500/10 dark:text-rose-400 dark:border-rose-500/20" 
+                                        : "bg-green-50 text-green-600 border border-green-100 dark:bg-green-500/10 dark:text-green-400 dark:border-green-500/20"
+                                }`}>
+                                    <div className="mt-0.5">{formMessage.type === "error" ? "⚠️" : "✅"}</div>
+                                    <span className="leading-snug">{formMessage.text}</span>
                                 </div>
                             )}
 

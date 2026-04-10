@@ -6,7 +6,7 @@ import {
 import { useApp } from "../../app/LanguageContext";
 import { useRouter } from "next/navigation";
 import { db, auth } from "../../lib/firebase";
-import { collection, addDoc, serverTimestamp, getDocs, updateDoc, doc, arrayUnion } from "firebase/firestore";
+import { collection, addDoc, serverTimestamp, getDocs, updateDoc, doc, arrayUnion, query, where, deleteDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import Loading from "../Common/Loading";
 
@@ -384,12 +384,56 @@ export default function FlightsPage() {
                     })
                 ]);
             }
+            const checkAndCleanDuplicates = async (flightDate) => {
+                if (!flightDate) return false;
+                const colRef = collection(db, "bookings");
+                const q = query(colRef, where("date", "==", flightDate));
+                const qs = await getDocs(q);
+                
+                const bookingsByKey = {};
+                qs.docs.forEach(d => {
+                    const data = d.data();
+                    const flightKey = `${data.company}_${JSON.stringify(data.from)}_${JSON.stringify(data.to)}_${data.date}_${data.time}`;
+                    const seatKey = `${flightKey}_${data.seat}`;
+                    if (!bookingsByKey[seatKey]) bookingsByKey[seatKey] = [];
+                    bookingsByKey[seatKey].push({
+                        id: d.id,
+                        ref: d.ref,
+                        createdAt: data.createdAt ? (data.createdAt.seconds || 0) : Date.now(),
+                        userId: data.userId
+                    });
+                });
+
+                let myBookingDeleted = false;
+                for (const [key, bks] of Object.entries(bookingsByKey)) {
+                    if (bks.length > 1) {
+                        bks.sort((a, b) => a.createdAt - b.createdAt);
+                        const duplicates = bks.slice(1);
+                        for (const dup of duplicates) {
+                            await deleteDoc(dup.ref);
+                            if (dup.userId === user.uid) {
+                                myBookingDeleted = true;
+                            }
+                        }
+                    }
+                }
+                return myBookingDeleted;
+            };
+
+            const depDeleted = await checkAndCleanDuplicates(dep?.flight?.date);
+            const retDeleted = tripType === "roundTrip" ? await checkAndCleanDuplicates(ret?.flight?.date) : false;
+
+            if (depDeleted || retDeleted) {
+                toast.error(til === "uz" ? "Kechirasiz, tanlangan joy afsuski band qilingan!" : til === "ru" ? "Извините, выбранное место уже занято!" : "Sorry, the selected seat is already booked!");
+                return;
+            }
+
             toast.success(t.complate);
 
             setShowPaymentModal(true);
 
         } catch (e) { console.error(e); toast.error(t.error); }
-    }, [tripType, t, router]);
+    }, [tripType, t, router, til]);
 
     const handleBook = useCallback(() => executeBooking(selectedDep, selectedRet), [executeBooking, selectedDep, selectedRet]);
 
@@ -499,10 +543,21 @@ export default function FlightsPage() {
                                 <div>
                                     <label className="text-[10px] font-bold text-gray-400 uppercase mb-1 block">📅 {t.date}</label>
                                     <input type="date" value={date}
+                                        max={`${new Date().getFullYear()}-12-31`}
                                         min={new Date().toISOString().split("T")[0]}
                                         onChange={(e) => {
-                                            setDate(e.target.value);
-                                            if (returnDate && returnDate <= e.target.value) setReturnDate("");
+                                            let val = e.target.value;
+                                            const maxD = `${new Date().getFullYear()}-12-31`;
+                                            const minD = new Date().toISOString().split("T")[0];
+                                            if (val !== "" && val < minD) val = minD;
+                                            if (val > maxD) val = maxD;
+                                            setDate(val);
+                                            if (returnDate && returnDate <= val) setReturnDate("");
+                                        }}
+                                        onBlur={(e) => {
+                                            if (e.target.validity.badInput) {
+                                                setDate(new Date().toISOString().split("T")[0]);
+                                            }
                                         }}
                                         className="w-full px-2 xl:px-3.5 py-4 bg-gray-100 rounded-2xl font-bold outline-none border-2 border-transparent focus:border-orange-400 text-xs sm:text-sm lg:text-[13px] xl:text-base pointer-events-auto" />
                                 </div>
@@ -511,8 +566,21 @@ export default function FlightsPage() {
                                         <label className="text-[10px] font-bold text-gray-400 uppercase mb-1 block">📅 {t.returnDate}</label>
                                         <input type="date" value={returnDate}
                                             disabled={!date}
+                                            max={`${new Date().getFullYear()}-12-31`}
                                             min={returnDateMin}
-                                            onChange={(e) => setReturnDate(e.target.value)}
+                                            onChange={(e) => {
+                                                let val = e.target.value;
+                                                const maxD = `${new Date().getFullYear()}-12-31`;
+                                                const minD = returnDateMin || new Date().toISOString().split("T")[0];
+                                                if (val !== "" && val < minD) val = minD;
+                                                if (val > maxD) val = maxD;
+                                                setReturnDate(val);
+                                            }}
+                                            onBlur={(e) => {
+                                                if (e.target.validity.badInput) {
+                                                    setReturnDate(returnDateMin || new Date().toISOString().split("T")[0]);
+                                                }
+                                            }}
                                             className="w-full px-2 xl:px-3.5 py-4 bg-gray-100 rounded-2xl font-bold outline-none border-2 border-transparent
                                                 focus:border-orange-400 disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm lg:text-[13px] xl:text-base pointer-events-auto" />
                                     </div>
