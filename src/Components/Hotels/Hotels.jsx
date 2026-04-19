@@ -121,11 +121,22 @@ export default function Hotels() {
 
     const filteredHotels = useMemo(() => {
         return hotels.filter(hotel => {
-            const cityName = hotel.city[til] || hotel.city.en;
-            const matchesSearch =
-                hotel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                cityName.toLowerCase().includes(searchQuery.toLowerCase());
-            const matchesCity = selectedCity === "All" || hotel.city.en === selectedCity;
+            const hotelName = typeof hotel.name === 'string' ? hotel.name.toLowerCase() : "";
+            let cityName = "";
+            let cityEn = "";
+            
+            if (hotel.city && typeof hotel.city === 'object') {
+                cityName = (hotel.city[til] || hotel.city.en || "").toLowerCase();
+                cityEn = hotel.city.en || "";
+            } else if (typeof hotel.city === 'string') {
+                cityName = hotel.city.toLowerCase();
+                cityEn = hotel.city;
+            }
+
+            const searchLower = (searchQuery || "").toLowerCase();
+            const matchesSearch = hotelName.includes(searchLower) || cityName.includes(searchLower);
+            const matchesCity = selectedCity === "All" || cityEn === selectedCity;
+            
             return matchesSearch && matchesCity;
         });
     }, [searchQuery, selectedCity, hotels, til]);
