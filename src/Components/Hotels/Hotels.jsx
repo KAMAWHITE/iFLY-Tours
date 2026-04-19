@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../../lib/firebase";
-import { FaSearch, FaMapMarkerAlt, FaTimes, FaCalendarAlt } from "react-icons/fa";
+import { FaSearch, FaMapMarkerAlt, FaTimes, FaCalendarAlt, FaStar } from "react-icons/fa";
 import { useApp } from "../../app/LanguageContext";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -179,7 +179,13 @@ export default function Hotels() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                             </div>
                             <div className="p-5">
-                                <h3 className="font-black text-lg truncate mb-1">{hotel.name}</h3>
+                                <div className="flex justify-between items-start mb-1 gap-2">
+                                    <h3 className="font-black text-lg truncate">{hotel.name}</h3>
+                                    <div className="flex items-center gap-1 bg-orange-100 dark:bg-orange-900/30 px-2 py-1 rounded-lg shrink-0">
+                                        <FaStar className="text-orange-500 text-[10px]" />
+                                        <span className="text-xs font-bold text-orange-600 dark:text-orange-400">{hotel.rating || "5.0"}</span>
+                                    </div>
+                                </div>
                                 <p className={`text-sm font-medium mb-2 ${darkMode ? "text-slate-400" : "text-gray-500"}`}>{hotel.city?.[til] || hotel.city?.en}</p>
                                 <p className="text-xl font-black text-orange-500">
                                     {Number(hotel.price).toLocaleString()}
@@ -210,9 +216,14 @@ export default function Hotels() {
                                     {til === "ru" ? "Отель" : til === "en" ? "Hotel" : "Mehmonxona"}
                                 </p>
                                 <h2 className="text-white font-black text-2xl">{selectedHotel.name}</h2>
-                                <p className="text-white/70 text-sm flex items-center gap-1.5 mt-1">
-                                    <FaMapMarkerAlt size={11} /> {selectedHotel.city?.[til] || selectedHotel.city?.en}
-                                </p>
+                                <div className="flex items-center gap-3 mt-1">
+                                    <p className="text-white/70 text-sm flex items-center gap-1.5">
+                                        <FaMapMarkerAlt size={11} /> {selectedHotel.city?.[til] || selectedHotel.city?.en}
+                                    </p>
+                                    <p className="text-white/90 text-sm flex items-center gap-1 bg-orange-500/20 px-2 py-0.5 rounded-lg backdrop-blur-sm border border-orange-500/30">
+                                        <FaStar size={11} className="text-orange-400" /> <span className="font-bold">{selectedHotel.rating || "5.0"}</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
