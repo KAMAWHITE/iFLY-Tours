@@ -31,5 +31,11 @@
         "duration_time": "tun",
         "total_price": "Umumiy narx",
         "book_now": "Band qilish"
-    }
+    },
+    "payment_title": "To'lov",
+    "secure_checkout": "Xavfsiz to'lov",
+    "card_number": "Karta raqami",
+    "expiry_date": "Muddati",
+    "card_holder": "Karta egasi (Ism va Familiya)",
+    "pay_done_btn": "TO'LOV QILINDI"
 }

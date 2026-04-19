@@ -9,6 +9,7 @@ import { db, auth } from "../../lib/firebase";
 import { collection, addDoc, serverTimestamp, getDocs, updateDoc, doc, arrayUnion, query, where, deleteDoc } from "firebase/firestore";
 import toast from "react-hot-toast";
 import Loading from "../Common/Loading";
+import PaymentModal from "../Common/PaymentModal";
 
 import FlightsUz from "../../../locales/uz/Flights.json";
 import FlightsRu from "../../../locales/ru/Flights.json";
@@ -112,50 +113,6 @@ function SeatMapModal({ isOpen, onClose, onConfirm, flight, darkMode, t, til }) 
     );
 }
 
-function PaymentModal({ isOpen, t, countdown }) {
-    if (!isOpen) return null;
-
-    return (
-        <div className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/80 backdrop-blur-xl p-4">
-            <div className="w-full max-w-lg bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-[40px] p-6 sm:p-10 text-center relative overflow-hidden shadow-[0_0_50px_rgba(255,165,0,0.2)] border border-white/10">
-                <div className="absolute -top-24 -left-24 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl animate-pulse" />
-                <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl animate-pulse" />
-
-                <div className="relative z-10 space-y-6">
-                    <div className="flex justify-center">
-                        <div className="w-20 h-20 sm:w-24 sm:h-24 bg-orange-500 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(249,115,22,0.5)] animate-bounce">
-                            <span className="text-3xl sm:text-4xl text-white">💳</span>
-                        </div>
-                    </div>
-
-                    <div className="space-y-2">
-                        <h3 className="text-3xl font-black text-white">{t.payment_message}</h3>
-                        <p className="text-orange-400 font-bold uppercase tracking-[0.2em] text-xs">
-                            {t.redirecting}
-                        </p>
-                    </div>
-
-                    <div className="flex justify-center items-center gap-4">
-                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl sm:text-3xl font-black text-orange-500">
-                            {countdown}
-                        </div>
-                    </div>
-
-                    <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
-                        <div
-                            className="bg-gradient-to-r from-orange-500 to-rose-500 h-full transition-all duration-1000 ease-linear"
-                            style={{ width: `${(countdown / 5) * 100}%` }}
-                        />
-                    </div>
-
-                    <p className="text-gray-400 text-xs font-medium">
-                        iFLY-Tours Premium Experience
-                    </p>
-                </div>
-            </div>
-        </div>
-    );
-}
 
 function FlightCard({ flight, til, darkMode, t, isSelected, onSelect }) {
     return (
@@ -254,19 +211,7 @@ export default function FlightsPage() {
     const [modal, setModal] = useState({ open: false, flight: null, direction: null });
 
     const [showPaymentModal, setShowPaymentModal] = useState(false);
-    const [countdown, setCountdown] = useState(5);
 
-    useEffect(() => {
-        let timer;
-        if (showPaymentModal && countdown > 0) {
-            timer = setInterval(() => {
-                setCountdown((prev) => prev - 1);
-            }, 1000);
-        } else if (showPaymentModal && countdown === 0) {
-            router.push("/profile");
-        }
-        return () => clearInterval(timer);
-    }, [showPaymentModal, countdown, router]);
 
     useEffect(() => {
         (async () => {
@@ -429,13 +374,14 @@ export default function FlightsPage() {
             }
 
             toast.success(t.complate);
-
-            setShowPaymentModal(true);
-
-        } catch (e) { console.error(e); toast.error(t.error); }
+            router.push("/profile");
+        } catch (e) {
+            console.error(e);
+            toast.error(t.error);
+        }
     }, [tripType, t, router, til]);
 
-    const handleBook = useCallback(() => executeBooking(selectedDep, selectedRet), [executeBooking, selectedDep, selectedRet]);
+    const handleBook = useCallback(() => setShowPaymentModal(true), []);
 
     const canBook = tripType === "oneWay" ? !!selectedDep : !!(selectedDep && selectedRet);
 
@@ -444,7 +390,7 @@ export default function FlightsPage() {
             const depData = { flight, seat };
             setSelectedDep(depData);
             if (tripType === "oneWay") {
-                executeBooking(depData, null);
+                setShowPaymentModal(true);
             }
         }
         if (modal.direction === "ret") {
@@ -765,7 +711,9 @@ export default function FlightsPage() {
             <PaymentModal
                 isOpen={showPaymentModal}
                 t={t}
-                countdown={countdown}
+                darkMode={darkMode}
+                onClose={() => setShowPaymentModal(false)}
+                onConfirm={() => executeBooking(selectedDep, selectedRet)}
             />
         </div>
     );

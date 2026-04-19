@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 
 import HotelsUz from "../../../locales/uz/Hotels.json";
 import Loading from "../Common/Loading";
+import PaymentModal from "../Common/PaymentModal";
 import HotelsEn from "../../../locales/en/Hotels.json";
 import HotelsRu from "../../../locales/ru/Hotels.json";
 
@@ -42,6 +43,7 @@ export default function Hotels() {
 
     const [checkIn, setCheckIn] = useState("");
     const [checkOut, setCheckOut] = useState("");
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
 
     useEffect(() => {
         const fetchHotels = async () => {
@@ -70,7 +72,7 @@ export default function Hotels() {
         return diffDays > 0 ? diffDays : 1;
     };
 
-    const handleBookHotel = async (hotel) => {
+    const triggerPayment = (hotel) => {
         const user = auth.currentUser;
         if (!user) {
             toast.error(til === "uz" ? "Boss, avval tizimga kirishingiz kerak!" : til === "ru" ? "Босс, сначала нужно войти в систему!" : "Please login first!");
@@ -82,6 +84,12 @@ export default function Hotels() {
             toast.error(til === "uz" ? "Sanalarni tanlang!" : til === "ru" ? "Выберите даты!" : "Select dates!");
             return;
         }
+        setShowPaymentModal(true);
+    };
+
+    const confirmHotelBooking = async () => {
+        const hotel = selectedHotel;
+        if (!hotel) return;
 
         setBookingLoading(true);
         const nights = calculateNights();
@@ -89,7 +97,7 @@ export default function Hotels() {
 
         try {
             await addDoc(collection(db, "hotel_bookings"), {
-                userId: user.uid,
+                userId: auth.currentUser.uid,
                 hotelId: hotel.firebaseId,
                 hotelName: hotel.name,
                 image: hotel.image,
@@ -102,6 +110,7 @@ export default function Hotels() {
             });
             toast.success(til === "uz" ? "Muvaffaqiyatli band qilindi!" : til === "ru" ? "Успешно забронировано!" : "Successfully booked!");
             setSelectedHotel(null);
+            setShowPaymentModal(false);
             router.push("/profile");
         } catch (error) {
             toast.error("Error: " + error.message);
@@ -276,7 +285,7 @@ export default function Hotels() {
 
                             <button
                                 disabled={bookingLoading}
-                                onClick={() => handleBookHotel(selectedHotel)}
+                                onClick={() => triggerPayment(selectedHotel)}
                                 className="w-full bg-gradient-to-r from-orange-500 to-rose-500 hover:from-orange-600 hover:to-rose-600 text-white py-4 rounded-2xl font-black text-sm tracking-wide transition-all shadow-lg shadow-orange-200 dark:shadow-none active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2"
                             >
                                 {bookingLoading
@@ -288,6 +297,14 @@ export default function Hotels() {
                     </div>
                 </div>
             )}
+
+            <PaymentModal
+                isOpen={showPaymentModal}
+                t={t}
+                darkMode={darkMode}
+                onClose={() => setShowPaymentModal(false)}
+                onConfirm={confirmHotelBooking}
+            />
         </div>
     );
 }

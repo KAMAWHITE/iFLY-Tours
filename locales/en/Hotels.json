@@ -31,5 +31,11 @@
         "duration_time": "night(s)",
         "total_price": "Total price",
         "book_now": "Book now"
-    }
+    },
+    "payment_title": "Payment",
+    "secure_checkout": "Secure Checkout",
+    "card_number": "Card Number",
+    "expiry_date": "Expiry Date",
+    "card_holder": "Cardholder Name",
+    "pay_done_btn": "PAYMENT DONE"
 }

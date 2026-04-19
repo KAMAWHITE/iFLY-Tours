@@ -31,5 +31,11 @@
         "duration_time": "ноч(ей)",
         "total_price": "Итоговая цена",
         "book_now": "Забронировать"
-    }
+    },
+    "payment_title": "Оплата",
+    "secure_checkout": "Безопасная оплата",
+    "card_number": "Номер карты",
+    "expiry_date": "Срок действия",
+    "card_holder": "Владелец карты (Имя и Фамилия)",
+    "pay_done_btn": "ОПЛАЧЕНО"
 }

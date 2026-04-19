@@ -58,5 +58,11 @@
     "sel_20": "Swiss Alps"
   },
   "payment_message": "Payment should have been made here",
-  "redirecting": "Redirecting to profile..."
+  "redirecting": "Redirecting to profile...",
+  "payment_title": "Payment",
+  "secure_checkout": "Secure Checkout",
+  "card_number": "Card Number",
+  "expiry_date": "Expiry Date",
+  "card_holder": "Cardholder Name",
+  "pay_done_btn": "PAYMENT DONE"
 }
